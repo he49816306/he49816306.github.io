@@ -167,7 +167,7 @@
         <div class="logo-name">Malroy的博客</div>
         <div class="logo-desc">
             
-            重庆大学 | 计算机科学与技术 | 自然语言处理
+            重庆科技大学 | 计算机科学与技术 | 自然语言处理
             
         </div>
     </div>
@@ -1035,58 +1035,48 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
-            </div>
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/06/19/FutureTask%E6%BA%90%E7%A0%81/">
+                <a href="/2021/01/04/%E6%96%B0%E5%BB%BA%E6%96%87%E6%9C%AC%E6%96%87%E6%A1%A3/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="FutureTask源码">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="分布式Redis锁">
                         
-                        <span class="card-title">FutureTask源码</span>
+                        <span class="card-title">分布式Redis锁</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            FutureTask源码简介实现了Future、Runnable接口，可以看成一个带执行结果的线程任务；代码很简单，就不说太多了，有些基础请私下问我，或者找度娘
-成员变量    private volatile int state;
-   
+                            一、业务背景有些业务请求，属于耗时操作，需要加锁，防止后续的并发操作，同时对数据库的数据进行操作，需要避免对之前的业务造成影响。
+
+二、分析流程使用 Redis 作为分布式锁，将锁的状态放到 Redis 统一维护，解决集群中单机 JVM 信
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-06-19
-                            </span>
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2021-01-04
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86/" class="post-category" target="_blank">
-                                    技术原理
+                            <a href="/categories/%E5%B9%B6%E5%8F%91/" class="post-category" target="_blank">
+                                    并发
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%8E%9F%E7%90%86/" target="_blank">
-                        <span class="chip bg-color">原理</span>
-                    </a>
-                    
-                    <a href="/tags/%E6%BA%90%E7%A0%81/" target="_blank">
-                        <span class="chip bg-color">源码</span>
-                    </a>
-                    
-                    <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" target="_blank">
-                        <span class="chip bg-color">多线程</span>
+                    <a href="/tags/java/" target="_blank">
+                        <span class="chip bg-color">java</span>
                     </a>
                     
                 </div>
@@ -1310,7 +1300,7 @@
 
             
             &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-            <span class="white-color">3.6k</span>
+            <span class="white-color">6k</span>
             
 
             <br>
