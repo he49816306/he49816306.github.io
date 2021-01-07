@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="分布式Redis锁, ECNU NLP DeepLearning AntNLP 何俊杰 malroy HejunJie HJJ 自然语言处理 深度学习 算法 java">
+    <meta name="keywords" content="Redis分布式锁, ECNU NLP DeepLearning AntNLP 何俊杰 malroy HejunJie HJJ 自然语言处理 深度学习 算法 java">
     <meta name="baidu-site-verification" content="fmlEuI34ir" />
     <meta name="google-site-verification" content="yCy2azpds5XSuGZvis6OuA-XIGF5GuGpYRAaGfD6o48" />
     <meta name="360-site-verification" content="b7c11a830ef90fd1464ad6206bb7b6e7" />
@@ -18,7 +18,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>分布式Redis锁 | Malroy的博客</title>
+    <title>Redis分布式锁 | Malroy的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -330,13 +330,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        分布式Redis锁
+                        Redis分布式锁
                     </div>
                 </div>
             </div>
@@ -485,7 +485,7 @@
                 
                 <div class="info-break-policy">
                     <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.4k
+                    2.5k
                 </div>
                 
 
@@ -539,7 +539,7 @@ static {
     }, 0,  2, TimeUnit.SECONDS);
 }</code></pre><hr>
 <h2 id="三、设计方案"><a href="#三、设计方案" class="headerlink" title="三、设计方案"></a><strong>三、设计方案</strong></h2><p>经过上面的分析，小何设计出了这个方案：</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/eQPyBffYbudlCobiaHZ8PopsY3Qc5DzdjrGWv1h83ic3O5h1Lrm1P7Y5c2yy3N7YibaRDIQJTfVCt3mx4CdRkNLSg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="10fc67da8be0d59acb5736f797cc2706.png" alt="图片"></p>
 <p>前面已经说了整体流程，这里强调一下几个核心步骤：</p>
 <ul>
 <li><strong>拦截注解 @RedisLock，获取必要的参数</strong></li>
@@ -754,8 +754,8 @@ public Book testRedisLock(@RequestParam(&quot;userId&quot;) Long userId) {
 java.lang.InterruptedException: sleep interrupted
  at java.lang.Thread.sleep(Native Method) [na:1.8.0_221]</code></pre><p>我这里测试的是重试次数过多，失败的场景，如果减少睡眠时间，就能让业务正常执行。</p>
 <p>如果同时请求，你将会发现以下错误信息：</p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/eQPyBffYbudlCobiaHZ8PopsY3Qc5DzdjPiaf7ZQh2myWiafm8MsyMqFA0otXZkumakjW68EB7C8JPSgmI99SPsNw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
-<p>表示我们的锁🔐的确生效了，避免了重复请求。</p>
+<pre><code>2021-01-04 14:58:00.857  INFO 9326 --- [nio-8081-exec-9] c.s.demo.aop.lock.RedisLockAspect       : has some error,please check again
+java.lang.Exception: You can&#39;t do it,because another has get the lock =-=</code></pre><p>表示我们的锁🔐的确生效了，避免了重复请求。</p>
 <hr>
 <h2 id="六、总结"><a href="#六、总结" class="headerlink" title="六、总结"></a><strong>六、总结</strong></h2><p>对于耗时业务和核心数据，不能让重复的请求同时操作数据，避免数据的不正确，所以要使用分布式锁来对它们进行保护。</p>
 <p>再来梳理一下设计流程：</p>
@@ -766,7 +766,7 @@ java.lang.InterruptedException: sleep interrupted
 <li>特定方法参数 ProceedingJoinPoint，对方法 pjp.proceed() 前后进行拦截</li>
 <li>切点前进行加锁，任务执行后进行删除 key</li>
 </ol>
-<p>本次学习是通过 <code>Review</code> 小伙伴的代码设计，从中了解分布式锁的具体实现，仿照他的设计，重新写了一份简化版的业务处理。对于之前没考虑到的「续时」操作，这里使用了守护线程来定时判断和延长超时时间，避免了锁提前释放。</p>
+<p>本次学习是通过 <code>测试小姐姐</code> 对操作进行并发测试，从中引申出分布式锁的概念和具体实现，然后写了一份简化版的业务处理。对于之前没考虑到的「续时」操作，这里使用了守护线程来定时判断和延长超时时间，避免了锁提前释放。</p>
 <p>于是乎，同时回顾了三个知识点：</p>
 <p>1、<code>AOP</code> 的实现和常用方法</p>
 <p>2、定时线程池 <code>ScheduledExecutorService</code> 的使用和参数含义</p>
@@ -884,7 +884,7 @@ java.lang.InterruptedException: sleep interrupted
                         <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
                     </ul>
                     <div id="alipay">
-                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                        <img src="/medias/reward/alipay.png" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
                         <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
@@ -930,9 +930,9 @@ java.lang.InterruptedException: sleep interrupted
             <br/>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
-                    《分布式Redis锁》
+                    《Redis分布式锁》
                 </span> 由
-            <a xmlns:cc="http://creativecommons.org/ns#" href="/2021/01/04/%E6%96%B0%E5%BB%BA%E6%96%87%E6%9C%AC%E6%96%87%E6%A1%A3/" property="cc:attributionName"
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2021/01/04/Redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/" property="cc:attributionName"
                rel="cc:attributionURL">
                 Malroy
             </a> 采用
@@ -973,7 +973,7 @@ java.lang.InterruptedException: sleep interrupted
         repo: 'malroy.gitee.io',
         owner: 'malroy',
         admin: "malroy",
-        id: '2021/01/04/新建文本文档/',
+        id: '2021/01/04/Redis分布式锁/',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -999,13 +999,13 @@ java.lang.InterruptedException: sleep interrupted
                 <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
             </div>
             <div class="card">
-                <a href="/2021/01/04/%E6%96%B0%E5%BB%BA%E6%96%87%E6%9C%AC%E6%96%87%E6%A1%A3/">
+                <a href="/2021/01/04/Redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="分布式Redis锁">
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="Redis分布式锁">
                         
-                        <span class="card-title">分布式Redis锁</span>
+                        <span class="card-title">Redis分布式锁</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1055,7 +1055,7 @@ java.lang.InterruptedException: sleep interrupted
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="FutureTask源码">
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="FutureTask源码">
                         
                         <span class="card-title">FutureTask源码</span>
                     </div>
@@ -1116,7 +1116,7 @@ java.lang.InterruptedException: sleep interrupted
 
         var selection = window.getSelection();
         // if the selection is short let's not annoy our users.
-        if (('' + selection).length < Number.parseInt('120')) {
+        if (('' + selection).length < Number.parseInt('60')) {
             return;
         }
 
@@ -1270,7 +1270,7 @@ java.lang.InterruptedException: sleep interrupted
 
             
             &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-            <span class="white-color">6k</span>
+            <span class="white-color">6.1k</span>
             
 
             <br>
@@ -1299,7 +1299,7 @@ java.lang.InterruptedException: sleep interrupted
 
 
 
-    <a href="mailto:626149529@qql.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+    <a href="mailto:626149529@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
         <i class="fa fa-envelope-open"></i>
     </a>
 
