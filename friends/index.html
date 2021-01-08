@@ -645,8 +645,9 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
     $(document).ready(function () {
 
         var int = setInterval(fixCount, 50);
-        var pvcountOffset = 80000;
-        var uvcountOffset = 20000;
+        var pvcountOffset = 20000;
+        var uvcountOffset = 5000;
+
 
         function fixCount() {
             if (document.getElementById("busuanzi_container_site_pv").style.display != "none") {
@@ -754,6 +755,7 @@ $(function () {
 
     
     <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
     
 
     <!-- 雪花特效 -->
