@@ -4,13 +4,12 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="FutureTask（附源码解析）, ECNU NLP DeepLearning AntNLP 何俊杰 malroy HejunJie HJJ 自然语言处理 深度学习 算法 java">
+    <meta name="keywords" content="面试官：如果让你来设计一个 MQ，该如何下手？, ECNU NLP DeepLearning AntNLP 何俊杰 malroy HejunJie HJJ 自然语言处理 深度学习 算法 java">
     <meta name="baidu-site-verification" content="fmlEuI34ir" />
     <meta name="google-site-verification" content="yCy2azpds5XSuGZvis6OuA-XIGF5GuGpYRAaGfD6o48" />
     <meta name="360-site-verification" content="b7c11a830ef90fd1464ad6206bb7b6e7" />
-    <meta name="description" content="FutureTask源码简介实现了Future、Runnable接口，可以看成一个带执行结果的线程任务；代码很简单，就不说太多了，有些基础请私下问我，或者找度娘
-成员变量    private volatile int state;
-   ">
+    <meta name="description" content="本文主要讲解 MQ 的通用知识，让大家先弄明白：如果让你来设计一个 MQ，该如何下手？需要考虑哪些问题？又有哪些技术挑战？
+有了这个基础后，我相信后面再讲 Kafka 和 RocketMQ 这两种具体的消息中间件时，大家能很快地抓住主脉络，">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +17,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>FutureTask（附源码解析） | Malroy的博客</title>
+    <title>面试官：如果让你来设计一个 MQ，该如何下手？ | Malroy的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -330,13 +329,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/24.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        FutureTask（附源码解析）
+                        面试官：如果让你来设计一个 MQ，该如何下手？
                     </div>
                 </div>
             </div>
@@ -447,16 +446,16 @@
                     
                     <div class="article-tag">
                         
-                        <a href="/tags/%E5%8E%9F%E7%90%86/" target="_blank">
-                            <span class="chip bg-color">原理</span>
-                        </a>
-                        
-                        <a href="/tags/%E6%BA%90%E7%A0%81/" target="_blank">
-                            <span class="chip bg-color">源码</span>
-                        </a>
-                        
                         <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" target="_blank">
                             <span class="chip bg-color">多线程</span>
+                        </a>
+                        
+                        <a href="/tags/%E4%BC%98%E5%8C%96/" target="_blank">
+                            <span class="chip bg-color">优化</span>
+                        </a>
+                        
+                        <a href="/tags/%E5%B9%B6%E5%8F%91/" target="_blank">
+                            <span class="chip bg-color">并发</span>
                         </a>
                         
                     </div>
@@ -467,8 +466,8 @@
                     <div class="post-cate">
                         <i class="fa fa-bookmark fa-fw icon-category"></i>
                         
-                        <a href="/categories/%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86/" class="post-category" target="_blank">
-                            技术原理
+                        <a href="/categories/%E5%B9%B6%E5%8F%91%E6%93%8D%E4%BD%9C/" class="post-category" target="_blank">
+                            并发操作
                         </a>
                         
                     </div>
@@ -479,7 +478,7 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-06-19
+                    2021-01-04
                 </div>
 
                 <div class="post-author info-break-policy">
@@ -493,14 +492,14 @@
                 
                 <div class="info-break-policy">
                     <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.8k
+                    3.9k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    8 分
+                    13 分
                 </div>
                 
                 
@@ -516,303 +515,112 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="FutureTask源码"><a href="#FutureTask源码" class="headerlink" title="FutureTask源码"></a>FutureTask源码</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>实现了Future、Runnable接口，可以看成一个带执行结果的线程任务；代码很简单，就不说太多了，有些基础请私下问我，或者找度娘</p>
-<h2 id="成员变量"><a href="#成员变量" class="headerlink" title="成员变量"></a>成员变量</h2><pre><code>    private volatile int state;
-    private static final int NEW          = 0;
-    private static final int COMPLETING   = 1;
-    private static final int NORMAL       = 2;
-    private static final int EXCEPTIONAL  = 3;
-    private static final int CANCELLED    = 4;
-    private static final int INTERRUPTING = 5;
-    private static final int INTERRUPTED  = 6;
-
-    private Callable&lt;V&gt; callable;
-    private Object outcome;
-    private volatile Thread runner;
-    private volatile WaitNode waiters;
-
-    private static final sun.misc.Unsafe U = sun.misc.Unsafe.getUnsafe();
-    private static final long STATE;
-    private static final long RUNNER;
-    private static final long WAITERS;
-    static {
-        try {
-            STATE = U.objectFieldOffset
-                (FutureTask.class.getDeclaredField(&quot;state&quot;));
-            RUNNER = U.objectFieldOffset
-                (FutureTask.class.getDeclaredField(&quot;runner&quot;));
-            WAITERS = U.objectFieldOffset
-                (FutureTask.class.getDeclaredField(&quot;waiters&quot;));
-        } catch (ReflectiveOperationException e) {
-            throw new Error(e);
-        }
-
-        Class&lt;?&gt; ensureLoaded = LockSupport.class;
-    }</code></pre><p><strong>关键信息解读</strong></p>
-<ul>
-<li>state，waiters， runner都可以做原子操作（Unsafe类）</li>
-<li>state 有7种状态，0 可执行态，1是执行完毕态，2是可以获取结果状态，3是执行出现异常，4,5是未执行取消状态，6是执行过程中取消状态</li>
-<li>callable 具体执行动作</li>
-<li>outcome 执行结果</li>
-<li>runner 动作执行所在线程</li>
-<li>waiters 单向链表，表头，内部含有线程信息；表示获取结果的挂起线程队列</li>
-</ul>
-<h2 id="成员方法"><a href="#成员方法" class="headerlink" title="成员方法"></a>成员方法</h2><h3 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h3><p>可以执行callble或者runnable对象，runnable对象使用适配器的方式，是配成新的callble对象，并且传入的result为结果；并确定当前状态为new，可执行状态</p>
-<pre><code>    public FutureTask(Callable&lt;V&gt; callable) {
-        if (callable == null)
-            throw new NullPointerException();
-        this.callable = callable;
-        this.state = NEW;
-    }
-
-    public FutureTask(Runnable runnable, V result) {
-        this.callable = Executors.callable(runnable, result);
-        this.state = NEW;
-    }</code></pre><h3 id="report方法"><a href="#report方法" class="headerlink" title="report方法"></a>report方法</h3><p>如果正常执行完毕，则返回执行结果，否则，根据状态抛出异常</p>
-<pre><code>    private V report(int s) throws ExecutionException {
-        Object x = outcome;
-        if (s == NORMAL)
-            return (V)x;
-        if (s &gt;= CANCELLED)
-            throw new CancellationException();
-        throw new ExecutionException((Throwable)x);
-    }</code></pre><h3 id="状态判断"><a href="#状态判断" class="headerlink" title="状态判断"></a>状态判断</h3><p>根据state对状态进行判断</p>
-<pre><code> public boolean isCancelled() {
-        return state &gt;= CANCELLED;
-    }
-
-    public boolean isDone() {
-        return state != NEW;
-    }</code></pre><h3 id="cancel任务"><a href="#cancel任务" class="headerlink" title="cancel任务"></a>cancel任务</h3><p>用户主动取消任务，根据用户是否可打断、任务是否执行，来改变状态 4,5,6</p>
-<pre><code>    public boolean cancel(boolean mayInterruptIfRunning) {
-        if (!(state == NEW &amp;&amp;
-              U.compareAndSwapInt(this, STATE, NEW,
-                  mayInterruptIfRunning ? INTERRUPTING : CANCELLED)))
-            return false;
-        try {    // in case call to interrupt throws exception
-            if (mayInterruptIfRunning) {
-                try {
-                    Thread t = runner;
-                    if (t != null)
-                        t.interrupt();
-                } finally { // final state
-                    U.putOrderedInt(this, STATE, INTERRUPTED);
-                }
-            }
-        } finally {
-            finishCompletion();
-        }
-        return true;
-    }</code></pre><h3 id="get获取执行结果"><a href="#get获取执行结果" class="headerlink" title="get获取执行结果"></a>get获取执行结果</h3><p>获取任务执行结果，最多等待时间模式，和无线等待时间模式</p>
-<pre><code>    public V get() throws InterruptedException, ExecutionException {
-        int s = state;
-        if (s &lt;= COMPLETING)
-            s = awaitDone(false, 0L);
-        return report(s);
-    }
-
-    /**
-     * @throws CancellationException {@inheritDoc}
-     */
-    public V get(long timeout, TimeUnit unit)
-        throws InterruptedException, ExecutionException, TimeoutException {
-        if (unit == null)
-            throw new NullPointerException();
-        int s = state;
-        if (s &lt;= COMPLETING &amp;&amp;
-            (s = awaitDone(true, unit.toNanos(timeout))) &lt;= COMPLETING)
-            throw new TimeoutException();
-        return report(s);
-    }</code></pre><h3 id="set执行结果"><a href="#set执行结果" class="headerlink" title="set执行结果"></a>set执行结果</h3><p>设置执行结果，如果是执行时出现异常，则结果为异常对象，否则执行结果为正常运算结果；并进行状态置换，1是一个临时态，2,3是最终结果态</p>
-<pre><code>   protected void set(V v) {
-        if (U.compareAndSwapInt(this, STATE, NEW, COMPLETING)) {
-            outcome = v;
-            U.putOrderedInt(this, STATE, NORMAL); 
-            finishCompletion();
-        }
-    }
-
-    protected void setException(Throwable t) {
-        if (U.compareAndSwapInt(this, STATE, NEW, COMPLETING)) {
-            outcome = t;
-            U.putOrderedInt(this, STATE, EXCEPTIONAL); 
-            finishCompletion();
-        }
-    }</code></pre><h3 id="任务执行项"><a href="#任务执行项" class="headerlink" title="任务执行项"></a>任务执行项</h3><p>具体执行任务动作，run执行返回结果，runAndReset执行不带结果，可再次执行</p>
-<pre><code>public void run() {
-        if (state != NEW ||
-            !U.compareAndSwapObject(this, RUNNER, null, Thread.currentThread()))
-            return;
-        try {
-            Callable&lt;V&gt; c = callable;
-            if (c != null &amp;&amp; state == NEW) {
-                V result;
-                boolean ran;
-                try {
-                    result = c.call();
-                    ran = true;
-                } catch (Throwable ex) {
-                    result = null;
-                    ran = false;
-                    setException(ex);
-                }
-                if (ran)
-                    set(result);
-            }
-        } finally {
-            runner = null;
-            int s = state;
-            if (s &gt;= INTERRUPTING)
-                handlePossibleCancellationInterrupt(s);
-        }
-    }
-
-    protected boolean runAndReset() {
-        if (state != NEW ||
-            !U.compareAndSwapObject(this, RUNNER, null, Thread.currentThread()))
-            return false;
-        boolean ran = false;
-        int s = state;
-        try {
-            Callable&lt;V&gt; c = callable;
-            if (c != null &amp;&amp; s == NEW) {
-                try {
-                    c.call(); // don&#39;t set result
-                    ran = true;
-                } catch (Throwable ex) {
-                    setException(ex);
-                }
-            }
-        } finally {
-            runner = null;
-            s = state;
-            if (s &gt;= INTERRUPTING)
-                handlePossibleCancellationInterrupt(s);
-        }
-        return ran &amp;&amp; s == NEW;
-    }</code></pre><ul>
-<li>检查状态是否是可执行，并cas设置线程对象从null到当前线程</li>
-<li>进行callable对象执行，如果出现异常，则设置异常结果，正常执行，返回正常结果</li>
-<li>最终设置线程为空，如果状态执行时状态发生了变化，处理可能的取消打断操作</li>
-</ul>
-<h3 id="finishCompletion方法"><a href="#finishCompletion方法" class="headerlink" title="finishCompletion方法"></a>finishCompletion方法</h3><p>结束任务方法，执行结束，打断结束，取消结束 waiters节点置空，并且清除队列，并且唤醒每个非空线程节点，callable对象置空；done方法可被继承，本类中什么都不做</p>
-<pre><code>      private void finishCompletion() {
-        for (WaitNode q; (q = waiters) != null;) {
-            if (U.compareAndSwapObject(this, WAITERS, q, null)) {
-                for (;;) {
-                    Thread t = q.thread;
-                    if (t != null) {
-                        q.thread = null;
-                        LockSupport.unpark(t);
-                    }
-                    WaitNode next = q.next;
-                    if (next == null)
-                        break;
-                    q.next = null;
-                    q = next;
-                }
-                break;
-            }
-        }
-        done();
-        callable = null;
-    }</code></pre><h3 id="awaitDone方法"><a href="#awaitDone方法" class="headerlink" title="awaitDone方法"></a>awaitDone方法</h3><p>等待获取执行结果方法，传入参数有两种，（false， 0） （true，大于0的整数值）；自旋处理</p>
-<pre><code>private int awaitDone(boolean timed, long nanos) throws InterruptedException {
-        long startTime = 0L; 
-        WaitNode q = null;
-        boolean queued = false;
-        for (;;) {
-            int s = state;
-            if (s &gt; COMPLETING) {
-                if (q != null)
-                    q.thread = null;
-                return s;
-            }
-            else if (s == COMPLETING)
-                Thread.yield();
-            else if (Thread.interrupted()) {
-                removeWaiter(q);
-                throw new InterruptedException();
-            }
-            else if (q == null) {
-                if (timed &amp;&amp; nanos &lt;= 0L)
-                    return s;
-                q = new WaitNode();
-            }
-            else if (!queued)
-                queued = U.compareAndSwapObject(this, WAITERS,q.next = waiters, q);
-            else if (timed) {
-                final long parkNanos;
-                if (startTime == 0L) {
-                    startTime = System.nanoTime();
-                    if (startTime == 0L)
-                        startTime = 1L;
-                    parkNanos = nanos;
-                } else {
-                    long elapsed = System.nanoTime() - startTime;
-                    if (elapsed &gt;= nanos) {
-                        removeWaiter(q);
-                        return state;
-                    }
-                    parkNanos = nanos - elapsed;
-                }
-                if (state &lt; COMPLETING)
-                    LockSupport.parkNanos(this, parkNanos);
-            }
-            else
-                LockSupport.park(this);
-        }
-    }
-</code></pre><p>自旋过程按照下面书序来执行</p>
-<ol>
-<li>状态判断，有3中状态判断：已有结果态，马上有结果态，获取结果被打断状态</li>
-</ol>
-<ul>
-<li>状态大于1，不是有结果了，就是异常了，就是被主动取消了，这时直接返回结果；状态等于1表示马上就到2或者3状态，下个循环就是状态大于1，直接返回结果</li>
-<li>如果线程正在执行，且被打断，重置打断状态，并且异常当前线程节点，抛出打断异常</li>
-</ul>
-<ol>
-<li>新建当前线程获取结果排队节点</li>
-<li>加入获取结果队列中，并且置为waiters，之前waiters值为next指向节点</li>
-<li>进行获取，有限时间内获取，或者无限制时间获取</li>
-</ol>
-<ul>
-<li>如果有限时间内获取，如果超时，返回当前状态，如果未超时且当前状态在正在执行状态，则线程挂起计算时间</li>
-<li>不限制时间获取，则直接等待</li>
-</ul>
-<h3 id="removeWaiter方法"><a href="#removeWaiter方法" class="headerlink" title="removeWaiter方法"></a>removeWaiter方法</h3><p>自旋处理，删除节点线程属性为空的节点</p>
-<pre><code>    private void removeWaiter(WaitNode node) {
-        if (node != null) {
-            node.thread = null;
-            retry:
-            for (;;) {          // restart on removeWaiter race
-                for (WaitNode pred = null, q = waiters, s; q != null; q = s) {
-                    s = q.next;
-                    if (q.thread != null)
-                        pred = q;
-                    else if (pred != null) {
-                        pred.next = s;
-                        if (pred.thread == null)
-                            continue retry;
-                    }
-                    else if (!U.compareAndSwapObject(this, WAITERS, q, s))
-                        continue retry;
-                }
-                break;
-            }
-        }
-    }</code></pre><p>处理思路：</p>
-<ul>
-<li>如果当前第一个节点的线程为空，则把下个线程置为头节点，如果还空继续此过程，知道头节点线程不为空，这是pred指向头，q为头下个节点，s为q下个节点</li>
-<li>如果q的线程为空，则把pred的next指向s</li>
-<li>如果q的线程不为空，则继续移动这3个节点对象，直到q为空，退出自旋</li>
-</ul>
-<h2 id="源码总结："><a href="#源码总结：" class="headerlink" title="源码总结："></a>源码总结：</h2><ul>
-<li>获取结果为阻塞过程，会挂起线程；等待结果执行完毕会被全部唤醒</li>
-<li>线程排队队列为单向链表，有指向下个节点属性；每次插入链表头部</li>
-<li>执行过程，进行结果处理，和唤醒链表中节点线程</li>
-<li>执行一次带结果动作，或者重复执行不带结果动作</li>
-</ul>
+                <p>本文主要讲解 MQ 的通用知识，让大家先弄明白：<strong>如果让你来设计一个 MQ，该如何下手？需要考虑哪些问题？又有哪些技术挑战？</strong></p>
+<p>有了这个基础后，我相信后面再讲 Kafka 和 RocketMQ 这两种具体的消息中间件时，大家能很快地抓住主脉络，同时分辨出它们各自的特点。</p>
+<p>对于 MQ 来说，不管是 RocketMQ、Kafka 还是其他消息队列，<strong>它们的本质都是：一发一存一消费。</strong>下面我们以这个本质作为根，一起由浅入深地聊聊 MQ。</p>
+<h2 id="01-从-MQ-的本质说起"><a href="#01-从-MQ-的本质说起" class="headerlink" title="01 从 MQ 的本质说起"></a>01 从 MQ 的本质说起</h2><p>将 MQ 掰开了揉碎了来看，都是「一发一存一消费」，再直白点就是一个「转发器」。</p>
+<p>生产者先将消息投递一个叫做「队列」的容器中，然后再从这个容器中取出消息，最后再转发给消费者，仅此而已。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/AaabKZjib2kYtDDgk83QJEQc4mzdZXMoTc8XdvgUhpcvhSwXCPicTFdulMFcy38icNkpiaiaWnN88HYF56ZeEFia48Bw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>上面这个图便是消息队列最原始的模型，它包含了两个关键词：消息和队列。</p>
+<blockquote>
+<p>1、消息：就是要传输的数据，可以是最简单的文本字符串，也可以是自定义的复杂格式（只要能按预定格式解析出来即可）。</p>
+<p>2、队列：大家应该再熟悉不过了，是一种先进先出数据结构。它是存放消息的容器，消息从队尾入队，从队头出队，入队即发消息的过程，出队即收消息的过程。</p>
+</blockquote>
+<p> 02 原始模型的进化 </p>
+<p>再看今天我们最常用的消息队列产品（RocketMQ、Kafka 等等），你会发现：它们都在最原始的消息模型上做了扩展，同时提出了一些新名词，比如：主题（topic）、分区（partition）、队列（queue）等等。</p>
+<p>要彻底理解这些五花八门的新概念，我们化繁为简，先从消息模型的演进说起（<strong>道理好比：架构从来不是设计出来的，而是演进而来的</strong>）</p>
+<h2 id="2-1-队列模型"><a href="#2-1-队列模型" class="headerlink" title="2.1 队列模型"></a>2.1 队列模型</h2><p>最初的消息队列就是上一节讲的原始模型，它是一个严格意义上的队列（Queue）。消息按照什么顺序写进去，就按照什么顺序读出来。不过，队列没有 “读” 这个操作，读就是出队，从队头中 “删除” 这个消息。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/AaabKZjib2kYtDDgk83QJEQc4mzdZXMoTlyKUozVQT5hzCt7AM5os3e3Kk5xNIdVlq0LYgJGemFIVGzdiaucHj9Q/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>这便是队列模型：它允许多个生产者往同一个队列发送消息。但是，如果有多个消费者，实际上是竞争的关系，也就是一条消息只能被其中一个消费者接收到，读完即被删除。</p>
+<h2 id="2-2-发布-订阅模型"><a href="#2-2-发布-订阅模型" class="headerlink" title="2.2 发布-订阅模型"></a>2.2 发布-订阅模型</h2><p>如果需要将一份消息数据分发给多个消费者，并且每个消费者都要求收到全量的消息。很显然，队列模型无法满足这个需求。</p>
+<p>一个可行的方案是：为每个消费者创建一个单独的队列，让生产者发送多份。这种做法比较笨，而且同一份数据会被复制多份，也很浪费空间。</p>
+<p>为了解决这个问题，就演化出了另外一种消息模型：发布-订阅模型。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/AaabKZjib2kYtDDgk83QJEQc4mzdZXMoTE521T7B5ttcBBgITerj6JLS3u6PO8Fk3rG1TClPRlh4IqEXj3u9OVQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>在发布-订阅模型中，存放消息的容器变成了 “主题”，订阅者在接收消息之前需要先 “订阅主题”。最终，每个订阅者都可以收到同一个主题的全量消息。</p>
+<p>仔细对比下它和 “队列模式” 的异同：生产者就是发布者，队列就是主题，消费者就是订阅者，无本质区别。唯一的不同点在于：一份消息数据是否可以被多次消费。</p>
+<h2 id="2-3-小结"><a href="#2-3-小结" class="headerlink" title="2.3 小结"></a>2.3 小结</h2><p>最后做个小结，上面两种模型说白了就是：单播和广播的区别。而且，当发布-订阅模型中只有 1 个订阅者时，它和队列模型就一样了，因此在功能上是完全兼容队列模型的。</p>
+<p>这也解释了为什么现代主流的 RocketMQ、Kafka 都是直接基于发布-订阅模型实现的？此外，RabbitMQ 中之所以有一个 Exchange 模块？其实也是为了解决消息的投递问题，可以变相实现发布-订阅模型。</p>
+<p>包括大家接触到的 “消费组”、“集群消费”、“广播消费” 这些概念，都和上面这两种模型相关，以及在应用层面大家最常见的情形：组间广播、组内单播，也属于此范畴。</p>
+<p>所以，先掌握一些共性的理论，对于大家再去学习各个消息中间件的具体实现原理时，其实能更好地抓住本质，分清概念。</p>
+<p> 03 透过模型看 MQ 的应用场景 </p>
+<p>目前，MQ 的应用场景非常多，大家能倒背如流的是：系统解耦、异步通信和流量削峰。除此之外，还有延迟通知、最终一致性保证、顺序消息、流式处理等等。</p>
+<p>那到底是先有消息模型，还是先有应用场景呢？答案肯定是：先有应用场景（也就是先有问题），再有消息模型，因为消息模型只是解决方案的抽象而已。</p>
+<p>MQ 经过 30 多年的发展，能从最原始的队列模型发展到今天百花齐放的各种消息中间件（平台级的解决方案），我觉得万变不离其宗，还是得益于：消息模型的适配性很广。</p>
+<p>我们试着重新理解下消息队列的模型。它其实解决的是：生产者和消费者的通信问题。那它对比 RPC 有什么联系和区别呢？</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/AaabKZjib2kYtDDgk83QJEQc4mzdZXMoTBgOCf9taFQ44e2dhuIIX0xiaZY7CnxarrMFtDbAMmEw6eO3LvZNZlDQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>通过对比，能很明显地看出两点差异：</p>
+<blockquote>
+<p>1、引入 MQ 后，由之前的一次 RPC 变成了现在的两次 RPC，而且生产者只跟队列耦合，它根本无需知道消费者的存在。</p>
+<p>2、多了一个中间节点「队列」进行消息转储，相当于将同步变成了异步。</p>
+</blockquote>
+<p>再返过来思考 MQ 的所有应用场景，就不难理解 MQ 为什么适用了？因为这些应用场景无外乎都利用了上面两个特性。</p>
+<p>举一个实际例子，比如说电商业务中最常见的「订单支付」场景：在订单支付成功后，需要更新订单状态、更新用户积分、通知商家有新订单、更新推荐系统中的用户画像等等。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/AaabKZjib2kYtDDgk83QJEQc4mzdZXMoTh9NVboPKrqNzialDbvqicAPWJRGVAic7iaF9QamfbDBNpqnPSkCPPm8nQw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>引入 MQ 后，订单支付现在只需要关注它最重要的流程：更新订单状态即可。其他不重要的事情全部交给 MQ 来通知。这便是 MQ 解决的最核心的问题：系统解耦。</p>
+<p>改造前订单系统依赖 3 个外部系统，改造后仅仅依赖 MQ，而且后续业务再扩展（比如：营销系统打算针对支付用户奖励优惠券），也不涉及订单系统的修改，从而保证了核心流程的稳定性，降低了维护成本。</p>
+<p>这个改造还带来了另外一个好处：因为 MQ 的引入，更新用户积分、通知商家、更新用户画像这些步骤全部变成了异步执行，能减少订单支付的整体耗时，提升订单系统的吞吐量。这便是 MQ 的另一个典型应用场景：异步通信。</p>
+<p>除此以外，由于队列能转储消息，对于超出系统承载能力的场景，可以用 MQ 作为 “漏斗” 进行限流保护，即所谓的流量削峰。</p>
+<p>我们还可以利用队列本身的顺序性，来满足消息必须按顺序投递的场景；利用队列 + 定时任务来实现消息的延时消费 ……</p>
+<p>MQ 其他的应用场景基本类似，都能回归到消息模型的特性上，找到它适用的原因，这里就不一一分析了。</p>
+<p>总之，就是建议大家多从复杂多变的实践场景再回归到理论层面进行思考和抽象，这样能吃得更透。</p>
+<p> 04 如何设计一个 MQ？ </p>
+<p>了解了上面这些理论知识以及应用场景后，下面我们再一起看下：到底如何设计一个 MQ？</p>
+<h2 id="4-1-MQ-的雏形"><a href="#4-1-MQ-的雏形" class="headerlink" title="4.1 MQ 的雏形"></a>4.1 MQ 的雏形</h2><p>我们还是先从简单版的 MQ 入手，如果只是实现一个很粗糙的 MQ，完全不考虑生产环境的要求，该如何设计呢？</p>
+<p>文章开头说过，任何 MQ 无外乎：一发一存一消费，这是 MQ 最核心的功能需求。另外，从技术维度来看 MQ 的通信模型，可以理解成：两次 RPC + 消息转储。</p>
+<p>有了这些理解，我相信只要有一定的编程基础，不用 1 个小时就能写出一个 MQ 雏形：</p>
+<blockquote>
+<p>1、直接利用成熟的 RPC 框架（Dubbo 或者 Thrift），实现两个接口：发消息和读消息。</p>
+<p>2、消息放在本地内存中即可，数据结构可以用 JDK 自带的 ArrayBlockingQueue 。</p>
+</blockquote>
+<h2 id="4-2-写一个适用于生产环境的-MQ"><a href="#4-2-写一个适用于生产环境的-MQ" class="headerlink" title="4.2 写一个适用于生产环境的 MQ"></a>4.2 写一个适用于生产环境的 MQ</h2><p>当然，我们的目标绝不止于一个 MQ 雏形，而是希望实现一个可用于生产环境的消息中间件，那难度肯定就不是一个量级了，具体我们该如何下手呢？</p>
+<p><strong>1、先把握这个问题的关键点</strong></p>
+<p>假如我们还是只考虑最基础的功能：发消息、存消息、消费消息（支持发布-订阅模式）。</p>
+<p>那在生产环境中，这些基础功能将面临哪些挑战呢？我们能很快想到下面这些：</p>
+<blockquote>
+<p>1、高并发场景下，如何保证收发消息的性能？</p>
+<p>2、如何保证消息服务的高可用和高可靠？</p>
+<p>3、如何保证服务是可以水平任意扩展的？</p>
+<p>4、如何保证消息存储也是水平可扩展的？</p>
+<p>5、各种元数据（比如集群中的各个节点、主题、消费关系等）如何管理，需不需要考虑数据的一致性？</p>
+</blockquote>
+<p>可见，高并发场景下的三高问题在你设计一个 MQ 时都会遇到，「如何满足高性能、高可靠等非功能性需求」才是这个问题的关键所在。</p>
+<p><strong>2、整体设计思路</strong></p>
+<p>先来看下整体架构，会涉及三类角色：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/AaabKZjib2kYtDDgk83QJEQc4mzdZXMoT7XhvkpoicdKCbdfcMZerDoialpvZDUMGNKiaichvCr5mkmibCF9CCZ7WrXA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>另外，将「一发一存一消费」这个核心流程进一步细化后，比较完整的数据流如下：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/AaabKZjib2kYtDDgk83QJEQc4mzdZXMoTPZfxteQ4f8zSYfy8DSDMWV93YOHBxJyoN7Vq1Do1wfc2JxlunQZxNw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>基于上面两个图，我们可以很快明确出 3 类角色的作用，分别如下：</p>
+<blockquote>
+<p>1、Broker（服务端）：MQ 中最核心的部分，是 MQ 的服务端，核心逻辑几乎全在这里，它为生产者和消费者提供 RPC 接口，负责消息的存储、备份和删除，以及消费关系的维护等。</p>
+<p>2、Producer（生产者）：MQ 的客户端之一，调用 Broker 提供的 RPC 接口发送消息。</p>
+<p>3、Consumer（消费者）：MQ 的另外一个客户端，调用 Broker 提供的 RPC 接口接收消息，同时完成消费确认。</p>
+</blockquote>
+<p><strong>3、详细设计</strong></p>
+<p>下面，再展开讨论下一些具体的技术难点和可行的解决方案。</p>
+<p><strong>难点1：RPC 通信</strong></p>
+<p>解决的是 Broker 与 Producer 以及 Consumer 之间的通信问题。如果不重复造轮子，直接利用成熟的 RPC 框架 Dubbo 或者 Thrift 实现即可，这样不需要考虑服务注册与发现、负载均衡、通信协议、序列化方式等一系列问题了。</p>
+<p>当然，你也可以基于 Netty 来做底层通信，用 Zookeeper、Euraka 等来做注册中心，然后自定义一套新的通信协议（类似 Kafka），也可以基于 AMQP 这种标准化的 MQ 协议来做实现（类似 RabbitMQ）。对比直接用 RPC 框架，这种方案的定制化能力和优化空间更大。</p>
+<p><strong><em>\</em>难点2：\</strong>高可用设计**</p>
+<p>高可用主要涉及两方面：Broker 服务的高可用、存储方案的高可用。可以拆开讨论。</p>
+<p>Broker 服务的高可用，只需要保证 Broker 可水平扩展进行集群部署即可，进一步通过服务自动注册与发现、负载均衡、超时重试机制、发送和消费消息时的 ack 机制来保证。</p>
+<p>存储方案的高可用有两个思路：1）参考 Kafka 的分区 + 多副本模式，但是需要考虑分布式场景下数据复制和一致性方案（类似 Zab、Raft等协议），并实现自动故障转移；2）还可以用主流的 DB、分布式文件系统、带持久化能力的 KV 系统，它们都有自己的高可用方案。</p>
+<p><strong>难点3：存储设计</strong></p>
+<p>消息的存储方案是 MQ 的核心部分，可靠性保证已经在高可用设计中谈过了，可靠性要求不高的话直接用内存或者分布式缓存也可以。这里重点说一下存储的高性能如何保证？这个问题的决定因素在于存储结构的设计。</p>
+<p>目前主流的方案是：追加写日志文件（数据部分） + 索引文件的方式（很多主流的开源 MQ 都是这种方式），索引设计上可以考虑稠密索引或者稀疏索引，查找消息可以利用跳转表、二份查找等，还可以通过操作系统的页缓存、零拷贝等技术来提升磁盘文件的读写性能。</p>
+<p>如果不追求很高的性能，也可以考虑现成的分布式文件系统、KV 存储或者数据库方案。</p>
+<p><strong><em>\</em>难点4：\</strong>消费关系管理<br>**</p>
+<p>为了支持发布-订阅的广播模式，Broker 需要知道每个主题都有哪些 Consumer 订阅了，基于这个关系进行消息投递。</p>
+<p>由于 Broker 是集群部署的，所以消费关系通常维护在公共存储上，可以基于 Zookeeper、Apollo 等配置中心来管理以及进行变更通知。</p>
+<p><strong><em>\</em>难点5：\</strong>高性能设计**</p>
+<p>存储的高性能前面已经谈过了，当然还可以从其他方面进一步优化性能。</p>
+<p>比如 Reactor 网络 IO 模型、业务线程池的设计、生产端的批量发送、Broker 端的异步刷盘、消费端的批量拉取等等。</p>
+<h2 id="4-3-小结"><a href="#4-3-小结" class="headerlink" title="4.3 小结"></a>4.3 小结</h2><p>再总结下，要回答好：如何设计一个 MQ？</p>
+<p>1、需要从功能性需求（收发消息）和非功能性需求（高性能、高可用、高扩展等）两方面入手。</p>
+<p>2、功能性需求不是重点，能覆盖 MQ 最基础的功能即可，至于延时消息、事务消息、重试队列等高级特性只是锦上添花的东西。</p>
+<p>3、最核心的是：能结合功能性需求，理清楚整体的数据流，然后顺着这个思路去考虑非功能性的诉求如何满足，这才是技术难点所在。</p>
+<p> 05 写在最后 </p>
+<p>这篇文章从 MQ  一发一存一消费这个本质出发，讲解了消息模型的演进过程，这是 MQ 最核心的理论基础。基于此，大家也能更容易理解 MQ 的各种新名词以及应用场景。</p>
+<p>最后通过回答：如何设计一个 MQ？目的是让大家对 MQ 的核心组件和技术难点有一个清晰的认识。另外，带着这个问题的答案再去学习 Kafka、RocketMQ 等具体的消息中间件时，也会更有侧重点。</p>
 
             </div>
             <hr />
@@ -971,9 +779,9 @@
             <br/>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
-                    《FutureTask（附源码解析）》
+                    《面试官：如果让你来设计一个 MQ，该如何下手？》
                 </span> 由
-            <a xmlns:cc="http://creativecommons.org/ns#" href="/2020/06/19/future-task/" property="cc:attributionName"
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2021/01/04/message-queue/" property="cc:attributionName"
                rel="cc:attributionURL">
                 Malroy
             </a> 采用
@@ -1279,6 +1087,68 @@
             <div class="article-badge left-badge text-color">
                 <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
+                <a href="/2022/07/29/ioc/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/28.jpg" class="responsive-img" alt="浅谈控制反转与依赖注入（转载）">
+                        
+                        <span class="card-title">浅谈控制反转与依赖注入（转载）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            浅谈控制反转与依赖注入第一章：小明和他的手机从前有个人叫小明
+小明有三大爱好，抽烟，喝酒…… 咳咳，不好意思，走错片场了。应该是逛知乎、玩王者农药和抢微信红包
+  
+小明的三大爱好 
+我们用一段简单的伪代码，来制造一个这样的小明 
+clas
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2022-07-29
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86/" class="post-category" target="_blank">
+                                    技术原理
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%8E%9F%E7%90%86/" target="_blank">
+                        <span class="chip bg-color">原理</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%80%9D%E6%83%B3/" target="_blank">
+                        <span class="chip bg-color">思想</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" target="_blank">
+                        <span class="chip bg-color">设计模式</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
                 <a href="/2021/01/04/redis-distributed-lock/">
                     <div class="card-image">
                         
@@ -1297,9 +1167,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2021-01-04
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2021-01-04
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
@@ -1325,57 +1195,6 @@
                     
                     <a href="/tags/%E5%B9%B6%E5%8F%91/" target="_blank">
                         <span class="chip bg-color">并发</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2020/06/19/cy-gossip/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="大话CY的那些日子">
-                        
-                        <span class="card-title">大话CY的那些日子</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            谈谈CY的日子其实还是很开心的拉。只是现在看到阿喵更开心~~ PS：不过阿喵
-虽然被鸡哥哥坑掉了，但是后面还是去了hz，开发了云平台，还是很不错滴拉。！
-
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-06-19
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fa fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E7%94%9F%E6%B4%BB%E6%97%A5%E5%B8%B8/" class="post-category" target="_blank">
-                                    生活日常
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E9%97%B2%E8%81%8A/" target="_blank">
-                        <span class="chip bg-color">闲聊</span>
                     </a>
                     
                 </div>

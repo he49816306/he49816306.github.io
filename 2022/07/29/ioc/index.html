@@ -4,13 +4,16 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="FutureTask（附源码解析）, ECNU NLP DeepLearning AntNLP 何俊杰 malroy HejunJie HJJ 自然语言处理 深度学习 算法 java">
+    <meta name="keywords" content="浅谈控制反转与依赖注入（转载）, ECNU NLP DeepLearning AntNLP 何俊杰 malroy HejunJie HJJ 自然语言处理 深度学习 算法 java">
     <meta name="baidu-site-verification" content="fmlEuI34ir" />
     <meta name="google-site-verification" content="yCy2azpds5XSuGZvis6OuA-XIGF5GuGpYRAaGfD6o48" />
     <meta name="360-site-verification" content="b7c11a830ef90fd1464ad6206bb7b6e7" />
-    <meta name="description" content="FutureTask源码简介实现了Future、Runnable接口，可以看成一个带执行结果的线程任务；代码很简单，就不说太多了，有些基础请私下问我，或者找度娘
-成员变量    private volatile int state;
-   ">
+    <meta name="description" content="浅谈控制反转与依赖注入第一章：小明和他的手机从前有个人叫小明
+小明有三大爱好，抽烟，喝酒…… 咳咳，不好意思，走错片场了。应该是逛知乎、玩王者农药和抢微信红包
+  
+小明的三大爱好 
+我们用一段简单的伪代码，来制造一个这样的小明 
+clas">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +21,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>FutureTask（附源码解析） | Malroy的博客</title>
+    <title>浅谈控制反转与依赖注入（转载） | Malroy的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -330,13 +333,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/28.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        FutureTask（附源码解析）
+                        浅谈控制反转与依赖注入（转载）
                     </div>
                 </div>
             </div>
@@ -451,12 +454,12 @@
                             <span class="chip bg-color">原理</span>
                         </a>
                         
-                        <a href="/tags/%E6%BA%90%E7%A0%81/" target="_blank">
-                            <span class="chip bg-color">源码</span>
+                        <a href="/tags/%E6%80%9D%E6%83%B3/" target="_blank">
+                            <span class="chip bg-color">思想</span>
                         </a>
                         
-                        <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" target="_blank">
-                            <span class="chip bg-color">多线程</span>
+                        <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" target="_blank">
+                            <span class="chip bg-color">设计模式</span>
                         </a>
                         
                     </div>
@@ -479,7 +482,7 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-06-19
+                    2022-07-29
                 </div>
 
                 <div class="post-author info-break-policy">
@@ -493,14 +496,14 @@
                 
                 <div class="info-break-policy">
                     <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.8k
+                    2.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    8 分
+                    7 分
                 </div>
                 
                 
@@ -516,303 +519,154 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="FutureTask源码"><a href="#FutureTask源码" class="headerlink" title="FutureTask源码"></a>FutureTask源码</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>实现了Future、Runnable接口，可以看成一个带执行结果的线程任务；代码很简单，就不说太多了，有些基础请私下问我，或者找度娘</p>
-<h2 id="成员变量"><a href="#成员变量" class="headerlink" title="成员变量"></a>成员变量</h2><pre><code>    private volatile int state;
-    private static final int NEW          = 0;
-    private static final int COMPLETING   = 1;
-    private static final int NORMAL       = 2;
-    private static final int EXCEPTIONAL  = 3;
-    private static final int CANCELLED    = 4;
-    private static final int INTERRUPTING = 5;
-    private static final int INTERRUPTED  = 6;
+                <h1 id="浅谈控制反转与依赖注入"><a href="#浅谈控制反转与依赖注入" class="headerlink" title="浅谈控制反转与依赖注入"></a>浅谈控制反转与依赖注入</h1><h2 id="第一章：小明和他的手机"><a href="#第一章：小明和他的手机" class="headerlink" title="第一章：小明和他的手机"></a>第一章：小明和他的手机</h2><p>从前有个人叫小明</p>
+<p>小明有三大爱好，抽烟，喝酒…… 咳咳，不好意思，走错片场了。应该是逛知乎、玩王者农药和抢微信红包</p>
+<p> <img src="https://pic4.zhimg.com/80/v2-709d32cb3e9cdd2ead92e40c998ce077_720w.jpg" alt="img"> </p>
+<p><strong>小明的三大爱好</strong> </p>
+<p>我们用一段简单的伪代码，来制造一个这样的小明 </p>
+<pre><code>class Ming extends Person
+{
+    private $_name;
 
-    private Callable&lt;V&gt; callable;
-    private Object outcome;
-    private volatile Thread runner;
-    private volatile WaitNode waiters;
+    private $_age;
 
-    private static final sun.misc.Unsafe U = sun.misc.Unsafe.getUnsafe();
-    private static final long STATE;
-    private static final long RUNNER;
-    private static final long WAITERS;
-    static {
-        try {
-            STATE = U.objectFieldOffset
-                (FutureTask.class.getDeclaredField(&quot;state&quot;));
-            RUNNER = U.objectFieldOffset
-                (FutureTask.class.getDeclaredField(&quot;runner&quot;));
-            WAITERS = U.objectFieldOffset
-                (FutureTask.class.getDeclaredField(&quot;waiters&quot;));
-        } catch (ReflectiveOperationException e) {
-            throw new Error(e);
-        }
-
-        Class&lt;?&gt; ensureLoaded = LockSupport.class;
-    }</code></pre><p><strong>关键信息解读</strong></p>
-<ul>
-<li>state，waiters， runner都可以做原子操作（Unsafe类）</li>
-<li>state 有7种状态，0 可执行态，1是执行完毕态，2是可以获取结果状态，3是执行出现异常，4,5是未执行取消状态，6是执行过程中取消状态</li>
-<li>callable 具体执行动作</li>
-<li>outcome 执行结果</li>
-<li>runner 动作执行所在线程</li>
-<li>waiters 单向链表，表头，内部含有线程信息；表示获取结果的挂起线程队列</li>
-</ul>
-<h2 id="成员方法"><a href="#成员方法" class="headerlink" title="成员方法"></a>成员方法</h2><h3 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h3><p>可以执行callble或者runnable对象，runnable对象使用适配器的方式，是配成新的callble对象，并且传入的result为结果；并确定当前状态为new，可执行状态</p>
-<pre><code>    public FutureTask(Callable&lt;V&gt; callable) {
-        if (callable == null)
-            throw new NullPointerException();
-        this.callable = callable;
-        this.state = NEW;
+    function read()
+    {
+        //逛知乎
     }
 
-    public FutureTask(Runnable runnable, V result) {
-        this.callable = Executors.callable(runnable, result);
-        this.state = NEW;
-    }</code></pre><h3 id="report方法"><a href="#report方法" class="headerlink" title="report方法"></a>report方法</h3><p>如果正常执行完毕，则返回执行结果，否则，根据状态抛出异常</p>
-<pre><code>    private V report(int s) throws ExecutionException {
-        Object x = outcome;
-        if (s == NORMAL)
-            return (V)x;
-        if (s &gt;= CANCELLED)
-            throw new CancellationException();
-        throw new ExecutionException((Throwable)x);
-    }</code></pre><h3 id="状态判断"><a href="#状态判断" class="headerlink" title="状态判断"></a>状态判断</h3><p>根据state对状态进行判断</p>
-<pre><code> public boolean isCancelled() {
-        return state &gt;= CANCELLED;
+    function  play()
+    {
+        //玩农药
     }
 
-    public boolean isDone() {
-        return state != NEW;
-    }</code></pre><h3 id="cancel任务"><a href="#cancel任务" class="headerlink" title="cancel任务"></a>cancel任务</h3><p>用户主动取消任务，根据用户是否可打断、任务是否执行，来改变状态 4,5,6</p>
-<pre><code>    public boolean cancel(boolean mayInterruptIfRunning) {
-        if (!(state == NEW &amp;&amp;
-              U.compareAndSwapInt(this, STATE, NEW,
-                  mayInterruptIfRunning ? INTERRUPTING : CANCELLED)))
-            return false;
-        try {    // in case call to interrupt throws exception
-            if (mayInterruptIfRunning) {
-                try {
-                    Thread t = runner;
-                    if (t != null)
-                        t.interrupt();
-                } finally { // final state
-                    U.putOrderedInt(this, STATE, INTERRUPTED);
-                }
-            }
-        } finally {
-            finishCompletion();
-        }
-        return true;
-    }</code></pre><h3 id="get获取执行结果"><a href="#get获取执行结果" class="headerlink" title="get获取执行结果"></a>get获取执行结果</h3><p>获取任务执行结果，最多等待时间模式，和无线等待时间模式</p>
-<pre><code>    public V get() throws InterruptedException, ExecutionException {
-        int s = state;
-        if (s &lt;= COMPLETING)
-            s = awaitDone(false, 0L);
-        return report(s);
+    function  grab()
+    {
+        //抢红包
     }
 
-    /**
-     * @throws CancellationException {@inheritDoc}
-     */
-    public V get(long timeout, TimeUnit unit)
-        throws InterruptedException, ExecutionException, TimeoutException {
-        if (unit == null)
-            throw new NullPointerException();
-        int s = state;
-        if (s &lt;= COMPLETING &amp;&amp;
-            (s = awaitDone(true, unit.toNanos(timeout))) &lt;= COMPLETING)
-            throw new TimeoutException();
-        return report(s);
-    }</code></pre><h3 id="set执行结果"><a href="#set执行结果" class="headerlink" title="set执行结果"></a>set执行结果</h3><p>设置执行结果，如果是执行时出现异常，则结果为异常对象，否则执行结果为正常运算结果；并进行状态置换，1是一个临时态，2,3是最终结果态</p>
-<pre><code>   protected void set(V v) {
-        if (U.compareAndSwapInt(this, STATE, NEW, COMPLETING)) {
-            outcome = v;
-            U.putOrderedInt(this, STATE, NORMAL); 
-            finishCompletion();
-        }
+}</code></pre><p>但是，小明作为一个人类，没有办法仅靠自己就能实现以上的功能，他必须<strong>依赖</strong>一部手机，所以他买了一台iphone6，接下来我们来制造一个iphone6 </p>
+<pre><code>class iPhone6 extends Iphone
+{
+    function read($user=&quot;某人&quot;)
+    {
+        echo $user.&quot;打开了知乎然后编了一个故事 \n&quot;;
     }
 
-    protected void setException(Throwable t) {
-        if (U.compareAndSwapInt(this, STATE, NEW, COMPLETING)) {
-            outcome = t;
-            U.putOrderedInt(this, STATE, EXCEPTIONAL); 
-            finishCompletion();
-        }
-    }</code></pre><h3 id="任务执行项"><a href="#任务执行项" class="headerlink" title="任务执行项"></a>任务执行项</h3><p>具体执行任务动作，run执行返回结果，runAndReset执行不带结果，可再次执行</p>
-<pre><code>public void run() {
-        if (state != NEW ||
-            !U.compareAndSwapObject(this, RUNNER, null, Thread.currentThread()))
-            return;
-        try {
-            Callable&lt;V&gt; c = callable;
-            if (c != null &amp;&amp; state == NEW) {
-                V result;
-                boolean ran;
-                try {
-                    result = c.call();
-                    ran = true;
-                } catch (Throwable ex) {
-                    result = null;
-                    ran = false;
-                    setException(ex);
-                }
-                if (ran)
-                    set(result);
-            }
-        } finally {
-            runner = null;
-            int s = state;
-            if (s &gt;= INTERRUPTING)
-                handlePossibleCancellationInterrupt(s);
-        }
+    function play($user=&quot;某人&quot;)
+    {
+        echo $user.&quot;打开了王者农药并送起了人头 \n&quot;;
     }
 
-    protected boolean runAndReset() {
-        if (state != NEW ||
-            !U.compareAndSwapObject(this, RUNNER, null, Thread.currentThread()))
-            return false;
-        boolean ran = false;
-        int s = state;
-        try {
-            Callable&lt;V&gt; c = callable;
-            if (c != null &amp;&amp; s == NEW) {
-                try {
-                    c.call(); // don&#39;t set result
-                    ran = true;
-                } catch (Throwable ex) {
-                    setException(ex);
-                }
-            }
-        } finally {
-            runner = null;
-            s = state;
-            if (s &gt;= INTERRUPTING)
-                handlePossibleCancellationInterrupt(s);
-        }
-        return ran &amp;&amp; s == NEW;
-    }</code></pre><ul>
-<li>检查状态是否是可执行，并cas设置线程对象从null到当前线程</li>
-<li>进行callable对象执行，如果出现异常，则设置异常结果，正常执行，返回正常结果</li>
-<li>最终设置线程为空，如果状态执行时状态发生了变化，处理可能的取消打断操作</li>
-</ul>
-<h3 id="finishCompletion方法"><a href="#finishCompletion方法" class="headerlink" title="finishCompletion方法"></a>finishCompletion方法</h3><p>结束任务方法，执行结束，打断结束，取消结束 waiters节点置空，并且清除队列，并且唤醒每个非空线程节点，callable对象置空；done方法可被继承，本类中什么都不做</p>
-<pre><code>      private void finishCompletion() {
-        for (WaitNode q; (q = waiters) != null;) {
-            if (U.compareAndSwapObject(this, WAITERS, q, null)) {
-                for (;;) {
-                    Thread t = q.thread;
-                    if (t != null) {
-                        q.thread = null;
-                        LockSupport.unpark(t);
-                    }
-                    WaitNode next = q.next;
-                    if (next == null)
-                        break;
-                    q.next = null;
-                    q = next;
-                }
-                break;
-            }
-        }
-        done();
-        callable = null;
-    }</code></pre><h3 id="awaitDone方法"><a href="#awaitDone方法" class="headerlink" title="awaitDone方法"></a>awaitDone方法</h3><p>等待获取执行结果方法，传入参数有两种，（false， 0） （true，大于0的整数值）；自旋处理</p>
-<pre><code>private int awaitDone(boolean timed, long nanos) throws InterruptedException {
-        long startTime = 0L; 
-        WaitNode q = null;
-        boolean queued = false;
-        for (;;) {
-            int s = state;
-            if (s &gt; COMPLETING) {
-                if (q != null)
-                    q.thread = null;
-                return s;
-            }
-            else if (s == COMPLETING)
-                Thread.yield();
-            else if (Thread.interrupted()) {
-                removeWaiter(q);
-                throw new InterruptedException();
-            }
-            else if (q == null) {
-                if (timed &amp;&amp; nanos &lt;= 0L)
-                    return s;
-                q = new WaitNode();
-            }
-            else if (!queued)
-                queued = U.compareAndSwapObject(this, WAITERS,q.next = waiters, q);
-            else if (timed) {
-                final long parkNanos;
-                if (startTime == 0L) {
-                    startTime = System.nanoTime();
-                    if (startTime == 0L)
-                        startTime = 1L;
-                    parkNanos = nanos;
-                } else {
-                    long elapsed = System.nanoTime() - startTime;
-                    if (elapsed &gt;= nanos) {
-                        removeWaiter(q);
-                        return state;
-                    }
-                    parkNanos = nanos - elapsed;
-                }
-                if (state &lt; COMPLETING)
-                    LockSupport.parkNanos(this, parkNanos);
-            }
-            else
-                LockSupport.park(this);
-        }
+    function grab($user=&quot;某人&quot;)
+    {
+        echo $user.&quot;开始抢红包却只抢不发 \n&quot;;
     }
-</code></pre><p>自旋过程按照下面书序来执行</p>
-<ol>
-<li>状态判断，有3中状态判断：已有结果态，马上有结果态，获取结果被打断状态</li>
-</ol>
-<ul>
-<li>状态大于1，不是有结果了，就是异常了，就是被主动取消了，这时直接返回结果；状态等于1表示马上就到2或者3状态，下个循环就是状态大于1，直接返回结果</li>
-<li>如果线程正在执行，且被打断，重置打断状态，并且异常当前线程节点，抛出打断异常</li>
-</ul>
-<ol>
-<li>新建当前线程获取结果排队节点</li>
-<li>加入获取结果队列中，并且置为waiters，之前waiters值为next指向节点</li>
-<li>进行获取，有限时间内获取，或者无限制时间获取</li>
-</ol>
-<ul>
-<li>如果有限时间内获取，如果超时，返回当前状态，如果未超时且当前状态在正在执行状态，则线程挂起计算时间</li>
-<li>不限制时间获取，则直接等待</li>
-</ul>
-<h3 id="removeWaiter方法"><a href="#removeWaiter方法" class="headerlink" title="removeWaiter方法"></a>removeWaiter方法</h3><p>自旋处理，删除节点线程属性为空的节点</p>
-<pre><code>    private void removeWaiter(WaitNode node) {
-        if (node != null) {
-            node.thread = null;
-            retry:
-            for (;;) {          // restart on removeWaiter race
-                for (WaitNode pred = null, q = waiters, s; q != null; q = s) {
-                    s = q.next;
-                    if (q.thread != null)
-                        pred = q;
-                    else if (pred != null) {
-                        pred.next = s;
-                        if (pred.thread == null)
-                            continue retry;
-                    }
-                    else if (!U.compareAndSwapObject(this, WAITERS, q, s))
-                        continue retry;
-                }
-                break;
-            }
-        }
-    }</code></pre><p>处理思路：</p>
-<ul>
-<li>如果当前第一个节点的线程为空，则把下个线程置为头节点，如果还空继续此过程，知道头节点线程不为空，这是pred指向头，q为头下个节点，s为q下个节点</li>
-<li>如果q的线程为空，则把pred的next指向s</li>
-<li>如果q的线程不为空，则继续移动这3个节点对象，直到q为空，退出自旋</li>
-</ul>
-<h2 id="源码总结："><a href="#源码总结：" class="headerlink" title="源码总结："></a>源码总结：</h2><ul>
-<li>获取结果为阻塞过程，会挂起线程；等待结果执行完毕会被全部唤醒</li>
-<li>线程排队队列为单向链表，有指向下个节点属性；每次插入链表头部</li>
-<li>执行过程，进行结果处理，和唤醒链表中节点线程</li>
-<li>执行一次带结果动作，或者重复执行不带结果动作</li>
-</ul>
+}</code></pre><p> 小明非常珍惜自己的新手机，每天把它牢牢<strong>控制</strong>在手心里，所以小明变成了这个样子 </p>
+<pre><code>class Ming extends Person
+{
+    private $_name;
+
+    private $_age;
+
+    public function  __construct()
+    {
+        $this-&gt;_name = &#39;小明&#39;;
+        $this-&gt;_age = 26;
+    }
+
+    function read()
+    {
+        //……  省略若干代码
+        (new iPhone6())-&gt;read($this-&gt;_name); //逛知乎
+    }
+
+    function  play()
+    {
+        //……  省略若干代码
+        (new iPhone6())-&gt;play($this-&gt;_name);//玩农药
+
+    }
+
+    function  grab()
+    {
+        //……  省略若干代码
+        (new iPhone6())-&gt;grab($this-&gt;_name);//抢红包
+
+    }
+
+}</code></pre><p> 今天是周六，小明不用上班，于是他起床，并依次逛起了知乎，玩王者农药，并抢了个红包。 </p>
+<pre><code>$ming = new Ming();  //小明起床
+$ming-&gt;read();
+$ming-&gt;play();
+$ming-&gt;grab();</code></pre><p> 这个时候，我们可以在命令行里看到输出如下 </p>
+<pre><code>小明打开了知乎然后编了一个故事 
+小明打开了王者农药并送起了人头 
+小明开始抢红包却只抢不发</code></pre><p> 这一天，小明过得很充实，他觉得自己是世界上最幸福的人。 </p>
+<h2 id="第二章：-小明的快乐与忧伤"><a href="#第二章：-小明的快乐与忧伤" class="headerlink" title="第二章： 小明的快乐与忧伤"></a>第二章： 小明的快乐与忧伤</h2><p>小明和他的手机曾一起度过了一段美好的时光，一到空闲时刻，他就抱着手机，逛知乎，刷微博，玩游戏，他觉得自己根本不需要女朋友，只要有手机在身边，就满足了。</p>
+<p>可谁能想到，一次次地系统更新彻底打碎了他的梦想，他的手机变得越来越卡顿，电池的使用寿命也越来越短，一直到某一天的寒风中，他的手机终于耐不住寒冷，头也不回地关了机。</p>
+<p>小明很忧伤，他意识到，自己要换手机了。</p>
+<p>为了能获得更好的使用体验，小明一咬牙，剁手了一台iphoneX，这部手机铃声很大，电量很足，还能双卡双待，小明很喜欢，但是他遇到一个问题，就是他之前过度依赖了原来那一部iPhone6，他们之间已经深深耦合在一起了，如果要换手机，他就要拿起刀来改造自己，把自己体内所有方法中的iphone6 都换成 iphoneX。</p>
+<p> <img src="https://pic4.zhimg.com/80/v2-e124d9d71c8400e1aab90f652f8d6bcf_720w.jpg" alt="img"> </p>
+<p> <strong>漫长的改造过程</strong> </p>
+<p>经历了漫长的改造过程，小明终于把代码中的 iphone6 全部换成了 iphoneX。虽然很辛苦，但是小明觉得他是快乐的。</p>
+<p>于是小明开开心心地带着手机去上班了，并在回来的路上被小偷偷走了。为了应急，小明只好重新使用那部刚刚被遗弃的iphone6，但是一想到那漫长的改造过程，小明的心里就说不出的委屈，他觉得自己过于<strong>依赖</strong>手机了，为什么每次手机出什么问题他都要去改造他自己，这不仅仅是<strong>过度耦合</strong>，简直是<strong>本末倒置</strong>，他向天空大喊，我不要再<strong>控制</strong>我的手机了。</p>
+<p>天空中的造物主，也就是作为程序员的我，听到了他的呐喊，我告诉他，你不用再控制你的手机了，交给我来管理，把控制权交给我。这就叫做<strong>控制反转</strong>。</p>
+<h2 id="第三章：造物主的智慧"><a href="#第三章：造物主的智慧" class="headerlink" title="第三章：造物主的智慧"></a>第三章：造物主的智慧</h2><p>小明听到了我的话，他既高兴，又有一点害怕，他跪下来磕了几个头，虔诚地说到：“原来您就是传说中的造物主，巴格梅克上神。我听到您刚刚说了 <strong>控制反转</strong> 四个字，就是把手机的控制权从我的手里交给你，但这只是您的想法，是一种思想罢了，要用什么办法才能实现控制反转，又可以让我继续使用手机呢？”</p>
+<p>“呵“，身为造物主的我在表现完不屑以后，扔下了四个大字，“依赖注入！”</p>
+<p>接下来，伟大的我开始对小明进行惨无人道的改造，如下</p>
+<pre><code>class Ming extends Person
+{
+    private $_name;
+
+    private $_age;
+
+    private $_phone; //将手机作为自己的成员变量
+
+    public function  __construct($phone)
+    {
+        $this-&gt;_name = &#39;小明&#39;;
+        $this-&gt;_age = 26;
+        $this-&gt;_phone = $phone;
+        echo &quot;小明起床了 \n&quot;;
+    }
+
+    function read()
+    {
+        //……  省略若干代码
+        $this-&gt;_phone-&gt;read($this-&gt;_name); //逛知乎
+    }
+
+    function  play()
+    {
+        //……  省略若干代码
+        $this-&gt;_phone-&gt;play($this-&gt;_name);//玩农药
+
+    }
+
+    function  grab()
+    {
+        //……  省略若干代码
+        $this-&gt;_phone-&gt;grab($this-&gt;_name);//抢红包
+
+    }
+
+}</code></pre><p> 接下来，我们来模拟运行小明的一天 </p>
+<pre><code>$phone = new IphoneX(); //创建一个iphoneX的实例
+if($phone-&gt;isBroken()){//如果iphone不可用，则使用旧版手机
+    $phone = new Iphone6();
+}
+$ming = new Ming($phone);//小明不用关心是什么手机，他只要玩就行了。
+$ming-&gt;read();
+$ming-&gt;play();
+$ming-&gt;grab();</code></pre><p>我们先看一下iphoneX 是否可以使用，如果不可以使用，则直接换成iphone6,然后唤醒小明，并把手机塞到他的手里，换句话说，把他所依赖的手机直接注入到他的身上，他不需要关心自己拿的是什么手机，他只要直接使用就可以了。</p>
+<p>这就是<strong>依赖注入</strong>。</p>
+<h2 id="第四章：小明的感悟"><a href="#第四章：小明的感悟" class="headerlink" title="第四章：小明的感悟"></a>第四章：小明的感悟</h2><p> 小明的生活开始变得简单了起来，而他把省出来的时间都用来写笔记了，他在笔记本上这样写到 </p>
+<blockquote>
+<p>我曾经有很强的控制欲，过度依赖于我的手机，导致我和手机之间耦合程度太高，只要手机出现一点点问题，我都要改造我自己，这实在是既浪费时间又容易出问题。自从我把控制权交给了造物主，他每天在唤醒我以前，就已经替我选好了手机，我只要按照平时一样玩手机就可以了，根本不用关心是什么手机。即便手机出了问题，也可以由造物主直接搞定，不需要再改造我自己了，我现在买了七部手机，都交给了造物主，每天换一部，美滋滋！<br><strong>我也从其中获得了这样的感悟：</strong> 如果一个类A 的功能实现需要借助于类B，那么就称类B是类A的<strong>依赖</strong>，如果在类A的内部去实例化类B，那么两者之间会出现较高的<strong>耦合</strong>，一旦类B出现了问题，类A也需要进行改造，如果这样的情况较多，每个类之间都有很多依赖，那么就会出现牵一发而动全身的情况，<strong>程序会极难维护</strong>，并且很容易出现问题。要解决这个问题，就要把A类对B类的控制权抽离出来，交给一个第三方去做，把控制权反转给第三方，就称作<strong>控制反转（IOC Inversion Of Control）</strong>。<strong>控制反转是一种思想</strong>，是能够解决问题的一种可能的结果，而<strong>依赖注入（Dependency Injection）</strong>就是其最典型的实现方法。由第三方（<strong>我们称作IOC容器</strong>）来控制依赖，把他通过<strong>构造函数、属性或者工厂模式</strong>等方法，注入到类A内，这样就极大程度的对类A和类B进行了<strong>解耦</strong>。</p>
+</blockquote>
+<h2 id="第五章-小明的困惑"><a href="#第五章-小明的困惑" class="headerlink" title="第五章 小明的困惑"></a>第五章 小明的困惑</h2><p>有一天，小明发现自己在想阅读知乎的时候，读到了这样一行文字。</p>
+<p>未完待续…</p>
 
             </div>
             <hr />
@@ -971,9 +825,9 @@
             <br/>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
-                    《FutureTask（附源码解析）》
+                    《浅谈控制反转与依赖注入（转载）》
                 </span> 由
-            <a xmlns:cc="http://creativecommons.org/ns#" href="/2020/06/19/future-task/" property="cc:attributionName"
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2022/07/29/ioc/" property="cc:attributionName"
                rel="cc:attributionURL">
                 Malroy
             </a> 采用
@@ -1275,31 +1129,94 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/01/04/redis-distributed-lock/">
+                <a href="/2022/07/29/ioc/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="Redis分布式锁">
+                        <img src="/medias/featureimages/28.jpg" class="responsive-img" alt="浅谈控制反转与依赖注入（转载）">
                         
-                        <span class="card-title">Redis分布式锁</span>
+                        <span class="card-title">浅谈控制反转与依赖注入（转载）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            一、业务背景有些业务请求，属于耗时操作，需要加锁，防止后续的并发操作，同时对数据库的数据进行操作，需要避免对之前的业务造成影响。
-
-二、分析流程使用 Redis 作为分布式锁，将锁的状态放到 Redis 统一维护，解决集群中单机 JVM 信
+                            浅谈控制反转与依赖注入第一章：小明和他的手机从前有个人叫小明
+小明有三大爱好，抽烟，喝酒…… 咳咳，不好意思，走错片场了。应该是逛知乎、玩王者农药和抢微信红包
+  
+小明的三大爱好 
+我们用一段简单的伪代码，来制造一个这样的小明 
+clas
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2021-01-04
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2022-07-29
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86/" class="post-category" target="_blank">
+                                    技术原理
+                                </a>
+                            
+                            
                         </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%8E%9F%E7%90%86/" target="_blank">
+                        <span class="chip bg-color">原理</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%80%9D%E6%83%B3/" target="_blank">
+                        <span class="chip bg-color">思想</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" target="_blank">
+                        <span class="chip bg-color">设计模式</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/01/04/message-queue/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/24.jpg" class="responsive-img" alt="面试官：如果让你来设计一个 MQ，该如何下手？">
+                        
+                        <span class="card-title">面试官：如果让你来设计一个 MQ，该如何下手？</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文主要讲解 MQ 的通用知识，让大家先弄明白：如果让你来设计一个 MQ，该如何下手？需要考虑哪些问题？又有哪些技术挑战？
+有了这个基础后，我相信后面再讲 Kafka 和 RocketMQ 这两种具体的消息中间件时，大家能很快地抓住主脉络，
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2021-01-04
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
@@ -1325,57 +1242,6 @@
                     
                     <a href="/tags/%E5%B9%B6%E5%8F%91/" target="_blank">
                         <span class="chip bg-color">并发</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2020/06/19/cy-gossip/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="大话CY的那些日子">
-                        
-                        <span class="card-title">大话CY的那些日子</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            谈谈CY的日子其实还是很开心的拉。只是现在看到阿喵更开心~~ PS：不过阿喵
-虽然被鸡哥哥坑掉了，但是后面还是去了hz，开发了云平台，还是很不错滴拉。！
-
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-06-19
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fa fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E7%94%9F%E6%B4%BB%E6%97%A5%E5%B8%B8/" class="post-category" target="_blank">
-                                    生活日常
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E9%97%B2%E8%81%8A/" target="_blank">
-                        <span class="chip bg-color">闲聊</span>
                     </a>
                     
                 </div>
