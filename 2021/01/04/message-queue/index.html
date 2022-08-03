@@ -1057,15 +1057,17 @@
     <div id="vcomments" class="card-content"></div>
 </div>
 
-<script src="/libs/valine/av-min.js"></script>
+<!-- <script src="/libs/valine/av-min.js"></script> -->
+<script src="//code.bdstatic.com/npm/leancloud-storage@4.13.1/dist/av-min.js"></script>
+
 <!-- <script src="/libs/valine/Valine.min.js"></script> -->
 <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
 
 <script>
     new Valine({
         el: '#vcomments',
-        appId: 'M8sQCpLQq2ejtHGvUHT8xXSV-gzGzoHsz',
-        appKey: 'w0HH3OCa4xXlm15Dr9km90Gh',
+        appId: 'PI1hgLzovYgOxeP13EtRHF6S-gzGzoHsz',
+        appKey: 'UGv6bSB3xwbA0rYwTAFx4MbJ',
         notify: 'false' === 'true',
         verify: 'false' === 'true',
         visitor: 'false' === 'true',
@@ -1087,6 +1089,68 @@
             <div class="article-badge left-badge text-color">
                 <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
+                <a href="/2022/07/29/ioc/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="浅谈控制反转与依赖注入（转载）">
+                        
+                        <span class="card-title">浅谈控制反转与依赖注入（转载）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            浅谈控制反转与依赖注入第一章：小明和他的手机从前有个人叫小明
+小明有三大爱好，抽烟，喝酒…… 咳咳，不好意思，走错片场了。应该是逛知乎、玩王者农药和抢微信红包
+  
+小明的三大爱好 
+我们用一段简单的伪代码，来制造一个这样的小明 
+clas
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2022-07-29
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86/" class="post-category" target="_blank">
+                                    技术原理
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%8E%9F%E7%90%86/" target="_blank">
+                        <span class="chip bg-color">原理</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%80%9D%E6%83%B3/" target="_blank">
+                        <span class="chip bg-color">思想</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" target="_blank">
+                        <span class="chip bg-color">设计模式</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
                 <a href="/2021/01/04/redis-distributed-lock/">
                     <div class="card-image">
                         
@@ -1105,9 +1169,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2021-01-04
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2021-01-04
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
@@ -1133,65 +1197,6 @@
                     
                     <a href="/tags/%E5%B9%B6%E5%8F%91/" target="_blank">
                         <span class="chip bg-color">并发</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2020/06/19/future-task/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="FutureTask（附源码解析）">
-                        
-                        <span class="card-title">FutureTask（附源码解析）</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            FutureTask源码简介实现了Future、Runnable接口，可以看成一个带执行结果的线程任务；代码很简单，就不说太多了，有些基础请私下问我，或者找度娘
-成员变量    private volatile int state;
-   
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2020-06-19
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fa fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86/" class="post-category" target="_blank">
-                                    技术原理
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E5%8E%9F%E7%90%86/" target="_blank">
-                        <span class="chip bg-color">原理</span>
-                    </a>
-                    
-                    <a href="/tags/%E6%BA%90%E7%A0%81/" target="_blank">
-                        <span class="chip bg-color">源码</span>
-                    </a>
-                    
-                    <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" target="_blank">
-                        <span class="chip bg-color">多线程</span>
                     </a>
                     
                 </div>
