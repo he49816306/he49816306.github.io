@@ -4,12 +4,11 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="轻量级依赖注入框架Google Guice（1）DI, ECNU NLP DeepLearning AntNLP 何俊杰 malroy HejunJie HJJ 自然语言处理 深度学习 算法 java">
+    <meta name="keywords" content="first-learn-metric, ECNU NLP DeepLearning AntNLP 何俊杰 malroy HejunJie HJJ 自然语言处理 深度学习 算法 java">
     <meta name="baidu-site-verification" content="fmlEuI34ir" />
     <meta name="google-site-verification" content="yCy2azpds5XSuGZvis6OuA-XIGF5GuGpYRAaGfD6o48" />
     <meta name="360-site-verification" content="b7c11a830ef90fd1464ad6206bb7b6e7" />
-    <meta name="description" content="轻量级依赖注入框架Google Guice（1）DI一、Google Guice简介​    Google Guice (读作”juice”)是超轻量级的，下一代的，为Java 5及后续版本设计的依赖注入容器。
-它在连接对象、访问中间层等方">
+    <meta name="description" content="初识Metric(指标)一、Prometheus简介​    Prometheus受启发于Google的Brogmon监控系统（相似的Kubernetes是从Google的Brog系统演变而来），从2012年开始由前Google工程师在So">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +16,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>轻量级依赖注入框架Google Guice（1）DI | Malroy的博客</title>
+    <title>first-learn-metric | Malroy的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -329,13 +328,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        轻量级依赖注入框架Google Guice（1）DI
+                        first-learn-metric
                     </div>
                 </div>
             </div>
@@ -445,32 +444,11 @@
                 <div class="col s7">
                     
                     <div class="article-tag">
-                        
-                        <a href="/tags/%E5%8E%9F%E7%90%86/" target="_blank">
-                            <span class="chip bg-color">原理</span>
-                        </a>
-                        
-                        <a href="/tags/%E6%80%9D%E6%83%B3/" target="_blank">
-                            <span class="chip bg-color">思想</span>
-                        </a>
-                        
-                        <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" target="_blank">
-                            <span class="chip bg-color">设计模式</span>
-                        </a>
-                        
+                        <span class="chip bg-color">无标签</span>
                     </div>
                     
                 </div>
                 <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fa fa-bookmark fa-fw icon-category"></i>
-                        
-                        <a href="/categories/%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86/" class="post-category" target="_blank">
-                            技术原理
-                        </a>
-                        
-                    </div>
                     
                 </div>
             </div>
@@ -478,7 +456,7 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-08-02
+                    2023-03-20
                 </div>
 
                 <div class="post-author info-break-policy">
@@ -492,14 +470,14 @@
                 
                 <div class="info-break-policy">
                     <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.4k
+                    2.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    5 分
+                    8 分
                 </div>
                 
                 
@@ -515,172 +493,64 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="轻量级依赖注入框架Google-Guice（1）DI"><a href="#轻量级依赖注入框架Google-Guice（1）DI" class="headerlink" title="轻量级依赖注入框架Google Guice（1）DI"></a>轻量级依赖注入框架Google Guice（1）DI</h1><h2 id="一、Google-Guice简介"><a href="#一、Google-Guice简介" class="headerlink" title="一、Google Guice简介"></a>一、Google Guice简介</h2><p>​    <code>Google Guice</code> (读作”juice”)是超轻量级的，下一代的，为Java 5及后续版本设计的依赖注入容器。</p>
-<p>它在连接对象、访问中间层等方面，体现了最大程度的灵活性和可维护性。</p>
-<p>​    正所谓谷歌出品，必属精品，况且<code>Guice</code>还出自于它的广告这种多金部门，自然也不例外。<code>Google Guice</code>被大量应用于谷歌内部，然后2010年开源出来。虽然业界反响并不大，但是因为它的<strong>轻量级</strong>，有些流行的开源框架（如<code>Druid、Apollo、Elastic Search、Play2</code>）把它作为基础的DI组件。</p>
-<h2 id="二、基础配置"><a href="#二、基础配置" class="headerlink" title="二、基础配置"></a>二、基础配置</h2><p>导入maven依赖。</p>
-<pre><code>        &lt;dependency&gt;
-            &lt;groupId&gt;com.google.inject&lt;/groupId&gt;
-            &lt;artifactId&gt;guice&lt;/artifactId&gt;
-            &lt;version&gt;${guice.version}&lt;/version&gt;
-        &lt;/dependency&gt;
-        &lt;dependency&gt;
-            &lt;groupId&gt;com.google.inject.extensions&lt;/groupId&gt;
-            &lt;artifactId&gt;guice-multibindings&lt;/artifactId&gt;
-            &lt;version&gt;${guice.version}&lt;/version&gt;
-        &lt;/dependency&gt;</code></pre><p>具体的发行版参考下述版本。</p>
-<p><img src="http://mrhjj.ancqy.top/blog/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220802141946.png" alt="guice版本"></p>
-<h2 id="三、快速开始"><a href="#三、快速开始" class="headerlink" title="三、快速开始"></a>三、快速开始</h2><p>我们先想象有一个简单的订单支付的业务。有支付服务，订单服务，价格计算服务。</p>
-<p>建立价格服务接口和其对应的实现</p>
-<pre><code>public interface PriceService {
-
-    /**
-     * &lt;p&gt;获取支持的货币&lt;/p&gt;
-     *
-     * @description: 获取支持的货币
-     * @return java.util.List&lt;java.lang.String&gt;
-     * @author: junjie he
-     * @create: 2022/8/2
-     */
-    List&lt;String&gt; getSupportedCurrencies();
-
-    /**
-     * &lt;p&gt;获取价格&lt;/p&gt;
-     *
-     * @description: 获取价格
-     * @param orderId 订单号
-     * @return long
-     * @author: junjie he
-     * @create: 2022/8/2
-     */
-    long getPrice(long orderId);
-
-}</code></pre><p>建立订单服务接口和其对应的实现</p>
-<pre><code>public interface OrderService {
-
-    /**
-     * &lt;p&gt;发送订单&lt;/p&gt;
-     *
-     * @description: 发送订单
-     * @param orderId 订单号
-     * @return void
-     * @author: junjie he
-     * @create: 2022/8/2
-     */
-    void sendToPayment(long orderId);
-
-}</code></pre><p>建立支付服务接口和其对应的实现</p>
-<pre><code>public interface PaymentService {
-
-    /**
-     * &lt;p&gt;付款操作&lt;/p&gt;
-     *
-     * @description: 付款操作
-     * @param orderId 订单号
-     * @param  price 价格
-     * @param  sessionId 会话ID
-     * @return void
-     * @author: junjie he
-     * @create: 2022/8/2
-     */
-    void pay(long orderId, long price, Object sessionId);
-
-}</code></pre><p>建立一个服务Module，将服务和模块进行关联。 在<code>Guice</code>中需要定义<code>Module</code>来进行关联，注入的配置是自写的Java类，必须继承<code>AbstractModule</code>抽象类，重写<code>configure</code>方法。</p>
-<pre><code>public class ServerModule extends AbstractModule {
-
-    @Override
-    protected void configure() {
-        //相当于将实现类注入
-        bind(OrderService.class).to(OrderServerImpl.class);
-        bind(PaymentService.class).to(PaymentServiceImpl.class);
-        bind(PriceService.class).to(PriceServiceImpl.class);
-     }
-}</code></pre><p>再编写一下相关的测试类，提供程序的启动入口。</p>
-<pre><code>public class OrderServerTest {
-
-    @Inject
-    private OrderService orderService;
-
-    @Inject
-    private PriceService priceService;
-
-    @Before
-    public void SetUp() {
-        //利用injectMembers，将当前所需的类具现化
-        Guice.createInjector(new ServerModule()).injectMembers(this);
-    }
-
-    @Test
-    public void testSendToPayment() {
-        orderService.sendToPayment(789L);
-    }
-
-    @Test
-    public void testSupportedCurrencies() {
-        throw new RuntimeException(
-            priceService.getSupportedCurrencies().toString()
-        );
-    }
-
-}</code></pre><p>大功告成，接下来介绍我们的几种注入方式。</p>
-<h2 id="四、常见的几种注入方式"><a href="#四、常见的几种注入方式" class="headerlink" title="四、常见的几种注入方式"></a>四、常见的几种注入方式</h2><p><img src="http://mrhjj.ancqy.top/blog/59e33f7d000198f517350585.jfif" alt="注入流程图解"></p>
-<p><code>Guice</code>注入图解如上，通过<code>@Inject</code>进行注入，这点跟spring还是有点类似，可以用构造方式注入，也可以直接注入到每个成员变量上，以下将列举集中注入方式。</p>
-<h3 id="1-纯类型注入"><a href="#1-纯类型注入" class="headerlink" title="1. 纯类型注入"></a>1. 纯类型注入</h3><p>在<code>price</code>模块中添加一个<code>price</code>的成员变量，然后在其构造中加入<code>@Inject</code>注解，同时在<code>ServerModule</code>中加入bind来绑定该类型值。完整代码如下：</p>
-<pre><code>    // PriceServiceImpl中添加成员变量
-    private final Long price;
-    // 构造做相应的改造
-    @Inject
-    public PriceServiceImpl(@Named(&quot;getSupported&quot;) Provider&lt;List&lt;String&gt;&gt; supportedCurrencies, 
-    Long price) {
-        this.supportedCurrencies = supportedCurrencies;
-        this.price = price;
-    }
-
-
-    // ServerModule中添加绑定
-    bind(Long.class).toInstance(1234L);
-
-    // 运行结果
-    java.lang.RuntimeException: Price=1234.SessionId=1659439200620.orderPaid=1</code></pre><p>可见<code>price</code>已经被绑定成了设置的1234。</p>
-<h3 id="2-Provider注入"><a href="#2-Provider注入" class="headerlink" title="2. Provider注入"></a>2. Provider注入</h3><p>将上述<code>price</code>的成员变量，改为<code>Provider</code>接口提供的值。同时在<code>ServerModule</code>中添加相关的<code>Provider</code>即可完成注入，完整代码如下：</p>
-<pre><code>    // PriceServiceImpl中修改成员变量为Provider
-    private final Provider&lt;Long&gt; price;
-
-    // ServerModule中绑定为provider并用函数式进行简化
-    bind(Long.class).toProvider(() -&gt; 1234L);
-
-    // 或者写一个 @Provides 的函数，类似于spring的bean
-    @Provides
-    Long generatePrice() {
-        return 1234L;
-    }</code></pre><p>可见，使用<code>Provider</code>注入会变得相当的灵活。</p>
-<h3 id="3-命名注入"><a href="#3-命名注入" class="headerlink" title="3. 命名注入"></a>3. 命名注入</h3><p>很多时候单一注入的方式并不能满足我们的需求，这时可以使用命名注入的方式，有点<code>指哪打哪</code>的意思，注入的时候只会关注名字与类型的匹配，这样可读性更高，并且更灵活。</p>
-<p>相关细节以及完整代码，如下</p>
-<pre><code>    // 构造函数中加入 @Named(&quot;price&quot;) 来标记该字段
-    @Inject
-    public PriceServiceImpl(@Named(&quot;getSupported&quot;) Provider&lt;List&lt;String&gt;&gt; supportedCurrencies,     @Named(&quot;price&quot;) Long price) {
-        this.supportedCurrencies = supportedCurrencies;
-        this.price = price;
-    }</code></pre><p>同时我们也可以通过采用<code>方法注入( Method Injection)</code> 或者 <code>场注入( Field Injection)</code> 这两种方式来完成我们的注入，这点和Spring的自动装载也比较类似。</p>
-<p>相关细节以及完整代码，如下</p>
-<pre><code>    // 下述为 方法注入( Method Injection) 方式
-    @Inject
-    public void setSupportedCurrencies(@Named(&quot;getSupported&quot;) Provider&lt;List&lt;String&gt;&gt;                 supportedCurrencies) {
-        this.supportedCurrencies = supportedCurrencies;
-    }
-
-    @Inject
-    public void setPrice(@Named(&quot;price&quot;) Long price) {
-        this.price = price;
-    }
-
-    // 下述为场注入( Field Injection) 方式
-    @Inject
-    @Named(&quot;price&quot;)
-    private Long price;</code></pre><p>注入写好了，在绑定操作的时候就必须绑定到相关命名注解才可以。</p>
-<pre><code>// 绑定的时候绑定到命名的注解
-bind(Long.class).annotatedWith(Names.named(&quot;price&quot;)).toProvider(() -&gt; 1234L);</code></pre><p>当然可以<code>自定义注解</code>，来代替<code>@Named</code>进行使用，因为使用方法<strong>大致上是一样</strong>的，就不再进行赘述。</p>
-<p>未完待续… 后面专题介绍Guice的绑定。</p>
+                <h1 id="初识Metric-指标"><a href="#初识Metric-指标" class="headerlink" title="初识Metric(指标)"></a>初识Metric(指标)</h1><h2 id="一、Prometheus简介"><a href="#一、Prometheus简介" class="headerlink" title="一、Prometheus简介"></a>一、Prometheus简介</h2><p>​    Prometheus受启发于Google的Brogmon监控系统（相似的Kubernetes是从Google的Brog系统演变而来），从2012年开始由前Google工程师在Soundcloud以开源软件的形式进行研发，并且于2015年早期对外发布早期版本。2016年5月继Kubernetes之后成为第二个正式加入CNCF基金会的项目，同年6月正式发布1.0版本。2017年底发布了基于全新存储层的2.0版本，能更好地与容器平台、云平台配合。 </p>
+<p><img src="https://www.z4a.net/images/2023/03/14/Prometheus-release-roadmap213213.png" alt="Prometheus简史"></p>
+<p> Prometheus作为新一代的云原生监控系统，目前已经有超过650+位贡献者参与到Prometheus的研发工作上，并且超过120+项的第三方集成。 </p>
+<h2 id="二、监控的目标"><a href="#二、监控的目标" class="headerlink" title="二、监控的目标"></a>二、监控的目标</h2><p>​    在《SRE: Google运维解密》一书中指出，监控系统需要能够有效的支持白盒监控和黑盒监控。通过白盒能够了解其内部的实际运行状态，通过对监控指标的观察能够预判可能出现的问题，从而对潜在的不确定因素进行优化。而黑盒监控，常见的如HTTP探针，TCP探针等，可以在系统或者服务在发生故障时能够快速通知相关的人员进行处理。通过建立完善的监控体系，从而达到以下目的：</p>
+<ul>
+<li>长期趋势分析：通过对监控样本数据的持续收集和统计，对监控指标进行长期趋势分析。例如，通过对磁盘空间增长率的判断，我们可以提前预测在未来什么时间节点上需要对资源进行扩容。</li>
+<li>对照分析：两个版本的系统运行资源使用情况的差异如何？在不同容量情况下系统的并发和负载变化如何？通过监控能够方便的对系统进行跟踪和比较。</li>
+<li>告警：当系统出现或者即将出现故障时，监控系统需要迅速反应并通知管理员，从而能够对问题进行快速的处理或者提前预防问题的发生，避免出现对业务的影响。</li>
+<li>故障分析与定位：当问题发生后，需要对问题进行调查和处理。通过对不同监控监控以及历史数据的分析，能够找到并解决根源问题。</li>
+<li>数据可视化：通过可视化仪表盘能够直接获取系统的运行状态、资源使用情况、以及服务运行状态等直观的信息。</li>
+</ul>
+<h2 id="三、认识Metric"><a href="#三、认识Metric" class="headerlink" title="三、认识Metric"></a>三、认识Metric</h2><p> <strong>Metric</strong> 指标，可以先简单理解为监控的数据。metric 是<code>Prometheus</code>监控的核心。 在Prometheus的存储实现上所有的监控样本都是以time-series的形式保存在Prometheus内存的TSDB（时序数据库）中，而time-series所对应的监控指标(metric)也是通过labelset进行唯一命名的。</p>
+<p>从存储上来讲所有的监控指标metric都是相同的，但是在不同的场景下这些metric又有一些细微的差异。 例如，在Node Exporter返回的样本中指标node_load1反应的是当前系统的负载状态，随着时间的变化这个指标返回的样本数据是在不断变化的。而指标node_cpu所获取到的样本数据却不同，它是一个持续增大的值，因为其反应的是CPU的累积使用时间，从理论上讲只要系统不关机，这个值是会无限变大的。</p>
+<p>为了能够帮助用户理解和区分这些不同监控指标之间的差异，Prometheus定义了4中不同的指标类型(metric type)：Counter（计数器）、Gauge（仪表盘）、Histogram（直方图）、Summary（摘要）。</p>
+<p>在Exporter返回的样本数据中，其注释中也包含了该样本的类型。例如： </p>
+<pre><code># HELP node_cpu Seconds the cpus spent in each mode.
+# TYPE node_cpu counter
+node_cpu{cpu=&quot;cpu0&quot;,mode=&quot;idle&quot;} 362812.7890625</code></pre><p>除了以 # 开头的是注释外，其他的就是一行行的metrics了</p>
+<p>举例：</p>
+<p><img src="https://www.z4a.net/images/2023/03/14/image8c66becc39634435.png" alt="metric组成"></p>
+<p>一个Metric数据 由 名字 + labels（可选）+ 值 三部分组成</p>
+<p>其中，<strong>名字 + labels 构成了 Metric 的唯一性</strong>。</p>
+<h2 id="四、Prometheus-Metric-有四种类型"><a href="#四、Prometheus-Metric-有四种类型" class="headerlink" title="四、Prometheus Metric 有四种类型"></a>四、Prometheus Metric 有四种类型</h2><h3 id="Counter：只增不减的计数器"><a href="#Counter：只增不减的计数器" class="headerlink" title="Counter：只增不减的计数器"></a>Counter：只增不减的计数器</h3><p>Counter类型的指标其工作方式和计数器一样，只增不减（除非系统发生重置）。常见的监控指标，如http_requests_total，node_cpu都是Counter类型的监控指标。 一般在定义Counter类型指标的名称时推荐使用_total作为后缀。</p>
+<p>Counter是一个简单但有强大的工具，例如我们可以在应用程序中记录某些事件发生的次数，通过以时序的形式存储这些数据，我们可以轻松的了解该事件产生速率的变化。 PromQL内置的聚合操作和函数可以让用户对这些数据进行进一步的分析：</p>
+<p>例如，通过rate()函数获取HTTP请求量的增长率：</p>
+<pre><code>rate(http_requests_total[5m])</code></pre><p>查询当前系统中，访问量前10的HTTP地址：</p>
+<pre><code>topk(10, http_requests_total)</code></pre><h3 id="Gauge：可增可减的仪表盘"><a href="#Gauge：可增可减的仪表盘" class="headerlink" title="Gauge：可增可减的仪表盘"></a>Gauge：可增可减的仪表盘</h3><p>与Counter不同，Gauge类型的指标侧重于反应系统的当前状态。因此这类指标的样本数据可增可减。常见指标如：node_memory_MemFree（主机当前空闲的内容大小）、node_memory_MemAvailable（可用内存大小）都是Gauge类型的监控指标。</p>
+<p>通过Gauge指标，用户可以直接查看系统的当前状态：</p>
+<pre><code>node_memory_MemFree</code></pre><p>对于Gauge类型的监控指标，通过PromQL内置函数delta()可以获取样本在一段时间返回内的变化情况。例如，计算CPU温度在两个小时内的差异：</p>
+<pre><code>delta(cpu_temp_celsius{host=&quot;zeus&quot;}[2h])</code></pre><p>还可以使用deriv()计算样本的线性回归模型，甚至是直接使用predict_linear()对数据的变化趋势进行预测。例如，预测系统磁盘空间在4个小时之后的剩余情况：</p>
+<pre><code>predict_linear(node_filesystem_free{job=&quot;node&quot;}[1h], 4 * 3600)</code></pre><h3 id="使用Histogram和Summary分析数据分布情况"><a href="#使用Histogram和Summary分析数据分布情况" class="headerlink" title="使用Histogram和Summary分析数据分布情况"></a>使用Histogram和Summary分析数据分布情况</h3><p>除了Counter和Gauge类型的监控指标以外，Prometheus还定义了Histogram和Summary的指标类型。Histogram和Summary主用用于统计和分析样本的分布情况。</p>
+<p>在大多数情况下人们都倾向于使用某些量化指标的平均值，例如CPU的平均使用率、页面的平均响应时间。这种方式的问题很明显，以系统API调用的平均响应时间为例：如果大多数API请求都维持在100ms的响应时间范围内，而个别请求的响应时间需要5s，那么就会导致某些WEB页面的响应时间落到中位数的情况，而这种现象被称为长尾问题。</p>
+<p>为了区分是平均的慢还是长尾的慢，最简单的方式就是按照请求延迟的范围进行分组。例如，统计延迟在0<del>10ms之间的请求数有多少而10</del>20ms之间的请求数又有多少。通过这种方式可以快速分析系统慢的原因。Histogram和Summary都是为了能够解决这样问题的存在，通过Histogram和Summary类型的监控指标，我们可以快速了解监控样本的分布情况。</p>
+<p>例如，指标prometheus_tsdb_wal_fsync_duration_seconds的指标类型为Summary。 它记录了Prometheus Server中wal_fsync处理的处理时间，通过访问Prometheus Server的/metrics地址，可以获取到以下监控样本数据：</p>
+<pre><code># HELP prometheus_tsdb_wal_fsync_duration_seconds Duration of WAL fsync.
+# TYPE prometheus_tsdb_wal_fsync_duration_seconds summary
+prometheus_tsdb_wal_fsync_duration_seconds{quantile=&quot;0.5&quot;} 0.012352463
+prometheus_tsdb_wal_fsync_duration_seconds{quantile=&quot;0.9&quot;} 0.014458005
+prometheus_tsdb_wal_fsync_duration_seconds{quantile=&quot;0.99&quot;} 0.017316173
+prometheus_tsdb_wal_fsync_duration_seconds_sum 2.888716127000002
+prometheus_tsdb_wal_fsync_duration_seconds_count 216</code></pre><p>从上面的样本中可以得知当前Prometheus Server进行wal_fsync操作的总次数为216次，耗时2.888716127000002s。其中中位数（quantile=0.5）的耗时为0.012352463，9分位数（quantile=0.9）的耗时为0.014458005s。</p>
+<p>在Prometheus Server自身返回的样本数据中，我们还能找到类型为Histogram的监控指标prometheus_tsdb_compaction_chunk_range_bucket。</p>
+<pre><code># HELP prometheus_tsdb_compaction_chunk_range Final time range of chunks on their first compaction
+# TYPE prometheus_tsdb_compaction_chunk_range histogram
+prometheus_tsdb_compaction_chunk_range_bucket{le=&quot;100&quot;} 0
+prometheus_tsdb_compaction_chunk_range_bucket{le=&quot;400&quot;} 0
+prometheus_tsdb_compaction_chunk_range_bucket{le=&quot;1600&quot;} 0
+prometheus_tsdb_compaction_chunk_range_bucket{le=&quot;6400&quot;} 0
+prometheus_tsdb_compaction_chunk_range_bucket{le=&quot;25600&quot;} 0
+prometheus_tsdb_compaction_chunk_range_bucket{le=&quot;102400&quot;} 0
+prometheus_tsdb_compaction_chunk_range_bucket{le=&quot;409600&quot;} 0
+prometheus_tsdb_compaction_chunk_range_bucket{le=&quot;1.6384e+06&quot;} 260
+prometheus_tsdb_compaction_chunk_range_bucket{le=&quot;6.5536e+06&quot;} 780
+prometheus_tsdb_compaction_chunk_range_bucket{le=&quot;2.62144e+07&quot;} 780
+prometheus_tsdb_compaction_chunk_range_bucket{le=&quot;+Inf&quot;} 780
+prometheus_tsdb_compaction_chunk_range_sum 1.1540798e+09
+prometheus_tsdb_compaction_chunk_range_count 780</code></pre><p>与Summary类型的指标相似之处在于Histogram类型的样本同样会反应当前指标的记录的总数(以_count作为后缀)以及其值的总量（以_sum作为后缀）。不同在于Histogram指标直接反应了在不同区间内样本的个数，区间通过标签len进行定义。</p>
+<p>同时对于Histogram的指标，我们还可以通过histogram_quantile()函数计算出其值的分位数。不同在于Histogram通过histogram_quantile函数是在服务器端计算的分位数。 而Sumamry的分位数则是直接在客户端计算完成。因此对于分位数的计算而言，Summary在通过PromQL进行查询时有更好的性能表现，而Histogram则会消耗更多的资源。反之对于客户端而言Histogram消耗的资源更少。在选择这两种方式时用户应该按照自己的实际场景进行选择。 </p>
 
             </div>
             <hr />
@@ -839,9 +709,9 @@ bind(Long.class).annotatedWith(Names.named(&quot;price&quot;)).toProvider(() -&g
             <br/>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
-                    《轻量级依赖注入框架Google Guice（1）DI》
+                    《first-learn-metric》
                 </span> 由
-            <a xmlns:cc="http://creativecommons.org/ns#" href="/2022/08/02/guice-di/" property="cc:attributionName"
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2023/03/20/first-learn-metric/" property="cc:attributionName"
                rel="cc:attributionURL">
                 Malroy
             </a> 采用
@@ -1149,6 +1019,41 @@ bind(Long.class).annotatedWith(Names.named(&quot;price&quot;)).toProvider(() -&g
             <div class="article-badge left-badge text-color">
                 <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
+                <a href="/2023/03/20/metric-named/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="metric-named">
+                        
+                        <span class="card-title">metric-named</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Metrics 设计的最佳实践1 如何确定需要测量的对象在具体设计 Metrics 之前，首先需要明确需要测量的对象。需要测量的对象应该依据具体的问题背景、需求和需监控的系统本身来确定。
+思路1：从需求出发Google 针对大量分布式监控的
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2023-03-20
+                        </span>
+                        <span class="publish-author">
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
                 <a href="/2022/08/03/guice-bind/">
                     <div class="card-image">
                         
@@ -1167,70 +1072,8 @@ bind(Long.class).annotatedWith(Names.named(&quot;price&quot;)).toProvider(() -&g
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2022-08-03
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fa fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86/" class="post-category" target="_blank">
-                                    技术原理
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E5%8E%9F%E7%90%86/" target="_blank">
-                        <span class="chip bg-color">原理</span>
-                    </a>
-                    
-                    <a href="/tags/%E6%80%9D%E6%83%B3/" target="_blank">
-                        <span class="chip bg-color">思想</span>
-                    </a>
-                    
-                    <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" target="_blank">
-                        <span class="chip bg-color">设计模式</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2022/07/29/ioc/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="浅谈控制反转与依赖注入（转载）">
-                        
-                        <span class="card-title">浅谈控制反转与依赖注入（转载）</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            浅谈控制反转与依赖注入第一章：小明和他的手机从前有个人叫小明
-小明有三大爱好，抽烟，喝酒…… 咳咳，不好意思，走错片场了。应该是逛知乎、玩王者农药和抢微信红包
-  
-小明的三大爱好 
-我们用一段简单的伪代码，来制造一个这样的小明 
-clas
-                        
-                    </div>
-                    <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2022-07-29
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2022-08-03
                             </span>
                         <span class="publish-author">
                             
@@ -1402,25 +1245,6 @@ clas
     
 
 </main>
-
-
-<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script>
-    MathJax.Hub.Config({
-        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
-    });
-</script>
-
-<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
-<!-- 代码语言 -->
-<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
-<!-- 代码块复制 -->
-<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
-<script type="text/javascript" src="/libs/codeBlock/clipboard.min.js"></script>
-<!-- 代码块收缩 -->
-<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script> 
-<!-- 代码块折行 -->
-<style type="text/css">code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }</style>
 
 
     <footer class="page-footer bg-color">
