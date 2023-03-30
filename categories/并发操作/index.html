@@ -355,29 +355,20 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                 
                 
                 
+                <a href="/categories/%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86/" title="技术原理: 6">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            style="background-color: #F9EBEA;">技术原理
+                        <span class="tag-length">6</span>
+                    </span>
+                </a>
+                
+                
                 <a href="/categories/%E7%94%9F%E6%B4%BB%E6%97%A5%E5%B8%B8/" title="生活日常: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #F9EBEA;">生活日常
+                            style="background-color: #F5EEF8;">生活日常
                         <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86/" title="技术原理: 4">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F5EEF8;">技术原理
-                        <span class="tag-length">4</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E5%B9%B6%E5%8F%91%E6%93%8D%E4%BD%9C/" title="并发操作: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-active "
-                            style="background-color: #D5F5E3;">并发操作
-                        <span class="tag-length">2</span>
                     </span>
                 </a>
                 
@@ -385,7 +376,16 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
                 <a href="/categories/%E7%BC%96%E7%A8%8B%E7%AE%97%E6%B3%95/" title="编程算法: 2">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #E8F8F5;">编程算法
+                            style="background-color: #D5F5E3;">编程算法
+                        <span class="tag-length">2</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/categories/%E5%B9%B6%E5%8F%91%E6%93%8D%E4%BD%9C/" title="并发操作: 2">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-active "
+                            style="background-color: #E8F8F5;">并发操作
                         <span class="tag-length">2</span>
                     </span>
                 </a>
@@ -403,21 +403,20 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
             
             <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2021/01/04/redis-distributed-lock/">
+                    <a href="/2021/01/04/message-queue/">
                         <div class="card-image tag-image">
                             
                             
-                            <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="Redis分布式锁">
+                            <img src="/medias/featureimages/25.jpg" class="responsive-img" alt="面试官：如果让你来设计一个 MQ，该如何下手？">
                             
-                            <span class="card-title">Redis分布式锁</span>
+                            <span class="card-title">面试官：如果让你来设计一个 MQ，该如何下手？</span>
                         </div>
                     </a>
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                一、业务背景有些业务请求，属于耗时操作，需要加锁，防止后续的并发操作，同时对数据库的数据进行操作，需要避免对之前的业务造成影响。
-
-二、分析流程使用 Redis 作为分布式锁，将锁的状态放到 Redis 统一维护，解决集群中单机 JVM 信
+                                本文主要讲解 MQ 的通用知识，让大家先弄明白：如果让你来设计一个 MQ，该如何下手？需要考虑哪些问题？又有哪些技术挑战？
+有了这个基础后，我相信后面再讲 Kafka 和 RocketMQ 这两种具体的消息中间件时，大家能很快地抓住主脉络，
                             
                         </div>
                         <div class="publish-info">
@@ -459,20 +458,21 @@ $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay
             
             <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2021/01/04/message-queue/">
+                    <a href="/2021/01/04/redis-distributed-lock/">
                         <div class="card-image tag-image">
                             
                             
-                            <img src="/medias/featureimages/28.jpg" class="responsive-img" alt="面试官：如果让你来设计一个 MQ，该如何下手？">
+                            <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="Redis分布式锁">
                             
-                            <span class="card-title">面试官：如果让你来设计一个 MQ，该如何下手？</span>
+                            <span class="card-title">Redis分布式锁</span>
                         </div>
                     </a>
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                本文主要讲解 MQ 的通用知识，让大家先弄明白：如果让你来设计一个 MQ，该如何下手？需要考虑哪些问题？又有哪些技术挑战？
-有了这个基础后，我相信后面再讲 Kafka 和 RocketMQ 这两种具体的消息中间件时，大家能很快地抓住主脉络，
+                                一、业务背景有些业务请求，属于耗时操作，需要加锁，防止后续的并发操作，同时对数据库的数据进行操作，需要避免对之前的业务造成影响。
+
+二、分析流程使用 Redis 作为分布式锁，将锁的状态放到 Redis 统一维护，解决集群中单机 JVM 信
                             
                         </div>
                         <div class="publish-info">
